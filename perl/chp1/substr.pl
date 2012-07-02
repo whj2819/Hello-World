@@ -1,11 +1,28 @@
 #!/usr/bin/perl
 
-use strict;
-use warnings;
+#use strict;
+#use warnings;
 
 =pon
 #1.1.3 discussion
 =cut
+$string = "This is what you have";
+#         +012345678901234567890  Indexing forwards  (left to right)
+#          109876543210987654321- Indexing backwards (right to left)
+#           note that 0 means 10 or 20, etc. above
+
+$first  = substr($string, 0, 1);  # "T"
+$start  = substr($string, 5, 2);  # "is"
+$rest   = substr($string, 13);    # "you have"
+$last   = substr($string, -1);    # "e"
+$end    = substr($string, -4);    # "have"
+$piece  = substr($string, -8, 3); # "you"
+print "$first \n";
+print "$start \n";
+print "$rest \n";
+print "$last \n";
+print "$end \n";
+print "$piece \n";
 
 
 
