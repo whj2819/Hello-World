@@ -3,9 +3,36 @@
 #use strict;
 #use warnings;
 
+
+
+
+
+
 =pon
+
+sub cut2fmt {
+    my (@positions) = @_;
+    my $template = '';
+    my $lastpos = 1;
+    
+    foreach $place (@positions) {
+        $template .="A" . ($place - $lastpos) ." ";
+        $lastpos = $place;
+    }
+    $template .= "A*";
+    return  $template;
+}
+
+$fmt = cut2fmt(8,14,20,26,30);
+print "$fmt \n";
+
+$a = "To be or not to be";
+$b = unpack("x6 A6",$a);
+print "$b \n";
+
+($b,$c) = unpack("x6 A2 X5 A2",$a);
+print "$b\n$c \n";
 #1.1.3 discussion
-=cut
 $string = "This is what you have";
 #         +012345678901234567890  Indexing forwards  (left to right)
 #          109876543210987654321- Indexing backwards (right to left)
@@ -23,6 +50,14 @@ print "$rest \n";
 print "$last \n";
 print "$end \n";
 print "$piece \n";
+
+
+$a = "make a hat";
+(substr($a,0,1),substr($a,-1)) = (substr($a,-1),substr($a,0,1));
+print "$a \n";
+
+=cut
+
 
 
 
@@ -74,4 +109,3 @@ substr($string,$offset) = $newtail;
 print "$newtail \n";
 print "$string \n";
 =cut
-
