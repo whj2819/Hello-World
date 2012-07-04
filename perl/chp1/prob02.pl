@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 
 
+print "___@ARGV \n";
 $dir = shift(@ARGV) || "/tmp";
-print @ARGV ;
 print "\n$dir \n";
 
 =pon
