@@ -1,7 +1,6 @@
 #include "apue.h"
 #include <sys/wait.h>
 
-/*
 void pr_exit(int status)
 {
     if ( WIFEXITED(status) ) {
@@ -17,48 +16,27 @@ void pr_exit(int status)
         printf("child stopped,signal number = %d \n", WSTOPSIG(status) );
     }
 }
-*/
 
+extern int system(const char *cmdstring);
 
 int main(void)
 {
-    pid_t   pid;
     int status;
 
-    if ((pid = fork()) < 0) {
-        err_sys("fork error");
-    }else if( 0 == pid) {
-        exit(7);
-    }
-
-    if ( wait(&status) != pid ) {
-        err_sys("wait error");
+    if ((status = system("date")) < 0) {
+        err_sys("system() error.\n");
     }
     pr_exit(status);
 
-
-    if ((pid = fork()) < 0) {
-        err_sys("fork error");
-    }else if( 0 == pid) {
-        abort(); 
-    }
-
-    if ( wait(&status) != pid ) {
-        err_sys("wait error");
+    if ((status = system("nosuchcommand")) < 0) {
+        err_sys("system() error.\n");
     }
     pr_exit(status);
 
-        
-    if ((pid = fork()) < 0) {
-        err_sys("fork error");
-    }else if( 0 == pid) {
-        status /= 0; 
-    }
-
-    if ( wait(&status) != pid ) {
-        err_sys("wait error");
+    if ((status = system("who; exit 44")) < 0) {
+        err_sys("system() error.\n");
     }
     pr_exit(status);
 
-    exit(0);
+    exit (0);
 }
