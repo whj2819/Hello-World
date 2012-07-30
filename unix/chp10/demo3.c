@@ -32,7 +32,3 @@ int main(void)
     pause();
     exit(0);
 }
-
-
-
-
