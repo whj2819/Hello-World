@@ -1,8 +1,9 @@
 #include "apue.h"
 #include <setjmp.h>
 #include <time.h>
+#include "pr_mask.c"
 
-static void sig_usr(int),sig_alrm(int);
+static void sig_usr1(int),sig_alrm(int);
 
 static sigjmp_buf    jmpbuf;
 static volatile sig_atomic_t    canjump;
@@ -26,7 +27,6 @@ int main(void)
     for (; ;) {
         pause();
     }
-
 }
 
 static void sig_usr1(int signo)
@@ -38,17 +38,19 @@ static void sig_usr1(int signo)
     }
     pr_mask("starting sig_usr1:");
     alarm(3);
-    startime = time(NULL);
+    starttime = time(NULL);
+    /* 时间太长了!
     for (; ;) {
         if (time(NULL) > starttime + 5) {
             break;
         }
     }
+    */
 
     pr_mask("finishing sig_usr1:");
 
     canjump = 0;
-    siglongjump(jmpbuf,1);
+    siglongjmp(jmpbuf,1);
 }
 
 static void sig_alrm(int signo)
