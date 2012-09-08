@@ -45,12 +45,20 @@ int main(void)
     if ((err = pthread_atfork(prepare,parent,child)) < 0) {
         err_exit(err,"can't install fork handlers.");
     }
-    err = pthread_create(&tid,NULL,thr_fun,0);
+    err = pthread_create(&tid,NULL,thr_fn,0);
     if (err != 0) {
         err_exit(err,"can't create thread");
     }
     sleep(2);
+
     printf("partent about to fork...\n");
+    if ((pid = fork()) <0) {
+        err_quit("fork failed");
+    } else if(0 == pid) {
+        printf("child returned from fork\n");
+    } else {
+        printf("partent returned from fork\n");
+    }
 #endif
     exit(0);
 }
