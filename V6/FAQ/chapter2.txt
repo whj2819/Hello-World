@@ -1,0 +1,9 @@
+2.13 Initial Conditions
+
+中virtual address 映射问题:
+0160000 to 0177777
+are mapped into the range
+0760000 to 077777是由于
+
+Although the 11/20 word length and operational logic was 16 bits, 
+the UNIBUS addressing logic was actually 18 bits
