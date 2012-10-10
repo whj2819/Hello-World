@@ -13,6 +13,7 @@ while ($pwline = <PASSWD>) {
         last;
     }
 }
+
 close PASSWD;
 
 open(LOGGEDON,"who |") || die "Can't open:$!";
