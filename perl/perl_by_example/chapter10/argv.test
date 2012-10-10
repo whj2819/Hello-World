@@ -1,0 +1,4 @@
+#!/usr/bin/perl
+
+while (<ARGV>) {print ;}
+print "The value of \$ARGV[0] is $ARGV[0]. \n";
