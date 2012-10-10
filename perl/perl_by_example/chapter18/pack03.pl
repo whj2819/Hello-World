@@ -13,3 +13,6 @@ print "$str2\n";
 
 $bytes = unpack("h*",$str);
 print "$bytes \n";
+
+$str1 = pack("h*",$bytes);
+print "$str1\n"; 
