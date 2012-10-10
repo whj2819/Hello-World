@@ -9,8 +9,8 @@ unless ($#ARGV == 0) {
 open(PASSWD,"/etc/passwd") || die "Can't open $!";
 $username = shift(@ARGV);
 while ($pwline = <PASSWD>) {
-    unless ($pwline =~ /$username:/) {
-        die "$username is not a user here.\n";
+    if($pwline =~ /$username:/) {
+        last;
     }
 }
 close PASSWD;
@@ -26,11 +26,11 @@ while ($logged = <LOGGEDON>) {
 close LOGGEDON;
 die "$username is not logged on.\n" if ! $logged_on;
 
-print "$username is logged on adn running these processes.\n";
-open(PROC,"ps -aux |") || die "Can't open:$! \n";
+print "$username is logged on and running these processes.\n";
+open(PROC,"ps -ef |") || die "Can't open:$! \n";
 
 while ($line = <PROC>) {
-    print "$line" if $line =~ /$username:/;
+    print "$line" if $line =~ /$username/;
 }
 close PROC;
 print '*' x 80,"\n";
