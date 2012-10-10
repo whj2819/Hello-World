@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+use warnings;
+
 $LOCK_EX = 2;
 $LOCK_UN = 8;
 
