@@ -10,4 +10,4 @@ sub ave {
     $total/$num_of_grades; # What gets returned
 }
 
-1;
+1; # Make sure the file returns true or require will not succeed!
