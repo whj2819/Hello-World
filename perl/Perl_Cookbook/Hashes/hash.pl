@@ -12,6 +12,8 @@ my %food_color = (
 
 my $key;
 my $value;
+my $food;
+my $color;
 
 
 while (($key,$value) = each %food_color) {
@@ -29,3 +31,14 @@ foreach ("Banana","Martini"){
 
 print "*" x 80,"\n";
 print map{"$_ => $food_color{$_}\n"} keys %food_color;
+
+
+
+print "*" x 80,"\n";
+my %foods_with_color = ();
+while (($food,$color) = each(%food_color)) {
+    push(@{$foods_with_color{$color}},$food);
+}
+
+print "@{$foods_with_color{yellow}} were yellow foods.\n";
+
