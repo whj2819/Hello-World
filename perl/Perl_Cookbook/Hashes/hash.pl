@@ -9,3 +9,20 @@ my %foo_color = (
     Lemon    => "yellow",
     Carrot   => "orange"
 );
+
+my $key;
+my $value;
+
+
+while (($key,$value) = each %foo_color) {
+    print "$key -- $value \n";
+}
+
+
+foreach ("Banana","Martini"){
+    if (exists($foo_color{$_})) {
+        print "$_ is food.\n";
+    } else {
+        print "$_ is a drink.\n";
+    }
+}
