@@ -9,5 +9,5 @@ my %surname = (
     "Babe"      => "Ruth"
 );
 
-my $first_name = reverse %surname;
-print $first_name{"Mantle"};
+my %first_name = reverse %surname;
+print $first_name{"Mantle"},"\n";
