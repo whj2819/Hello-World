@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-my %foo_color = (
+my %food_color = (
     Apple    => "red",
     Banana   => "yellow",
     Lemon    => "yellow",
@@ -14,15 +14,18 @@ my $key;
 my $value;
 
 
-while (($key,$value) = each %foo_color) {
+while (($key,$value) = each %food_color) {
     print "$key -- $value \n";
 }
 
 
 foreach ("Banana","Martini"){
-    if (exists($foo_color{$_})) {
+    if (exists($food_color{$_})) {
         print "$_ is food.\n";
     } else {
         print "$_ is a drink.\n";
     }
 }
+
+print "*" x 80,"\n";
+print map{"$_ => $food_color{$_}\n"} keys %food_color;
