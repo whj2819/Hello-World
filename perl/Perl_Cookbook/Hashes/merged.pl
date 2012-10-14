@@ -16,6 +16,7 @@ my %drink_color = (
 );
 my $key,
 my $value;
+my %substance_color = ();
 
 =pon
 #first method
@@ -25,9 +26,8 @@ while (($key,$value) = each %ingested_color) {
 }
 =cut
 
+=pon
 #second method
-
-my %substance_color = ();
 while (($key,$value) = each %food_color) {
     $substance_color{$key} = $value;
 
@@ -36,6 +36,17 @@ while (($key,$value) = each %food_color) {
 while (($key,$value) = each %drink_color) {
     $substance_color{$key} = $value;
 }
+
+=cut
+
+# third method 
+my $substanceref;
+foreach $substanceref (\%food_color, \%drink_color) {
+    while (($key,$value) = each %$substanceref) {
+        $substance_color{$key} = $value;
+    }
+}
+
 
 while (($key,$value) = each %substance_color) {
     print "$key => $value \n";
