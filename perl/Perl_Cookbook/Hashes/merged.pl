@@ -17,6 +17,7 @@ my %drink_color = (
 my $key,
 my $value;
 my %substance_color = ();
+my $substanceref;
 
 =pon
 #first method
@@ -39,14 +40,31 @@ while (($key,$value) = each %drink_color) {
 
 =cut
 
+=pon
 # third method 
-my $substanceref;
 foreach $substanceref (\%food_color, \%drink_color) {
     while (($key,$value) = each %$substanceref) {
         $substance_color{$key} = $value;
     }
 }
 
+
+while (($key,$value) = each %substance_color) {
+    print "$key => $value \n";
+}
+=cut
+
+# fourth methord
+foreach $substanceref (\%food_color, \%drink_color) {
+    while (($key,$value) = each %$substanceref) {
+        print $key ,"\n\n\n";   
+        if (exists $substance_color{$key}) {
+            print "Warning: $key seen twice.Using the first definition.\n";
+            next;
+        }
+        $substance_color{$key} = $value;
+    }
+}
 
 while (($key,$value) = each %substance_color) {
     print "$key => $value \n";
