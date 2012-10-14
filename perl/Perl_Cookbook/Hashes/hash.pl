@@ -16,6 +16,12 @@ my $food;
 my $color;
 
 
+
+foreach $key (keys %food_color) {
+    print "$key \n";
+}
+
+print "\n" x 5;
 while (($key,$value) = each %food_color) {
     print "$key -- $value \n";
 }
@@ -42,3 +48,10 @@ while (($food,$color) = each(%food_color)) {
 
 print "@{$foods_with_color{yellow}} were yellow foods.\n";
 
+
+print "*" x 80,"\n";
+
+# sort by their associted values;
+foreach $food (sort {$food_color{$a} cmp $food_color{$b}} keys %food_color) {
+    print "$food is $food_color{$food} \n";
+}
