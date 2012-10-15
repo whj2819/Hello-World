@@ -5,11 +5,8 @@ use warnings;
 
 my ($cmd,@args) = @ARGV; 
 my $package_name = "$$.cap";
-my $dump_all_of_pack = "tcpdump -i eth0 -w /tmp/$package_name -c 10000 -s 1600 ";
-my $dump_part_of_pack = 0;
-
-print "$cmd \n\n";
-print "$package_name \n\n";
+my $dump_all_of_pack = "tcpdump -i p2p1 -w /tmp/$package_name -c 10000 -s 1600 ";
+my $dump_part_of_pack = $dump_all_of_pack;
 
 if ($args[0] eq '--start') {
     my $rv;
@@ -36,14 +33,16 @@ if ($args[0] eq '--start') {
 
 sub tcpdump_start {
     my $rv;
-    my $stbmac;
+    my $stbmac = 0;
 
-    if (args[2]) { # IPTMAC is not null;
-        rv = stbmac_find(\$stbmac);
-        while (rv) { 
-            rv = stbmac_find(\$stbmac);
+    if ($args[2]) { # IPTMAC is not null;
+        $rv = stbmac_find(\$stbmac);
+        print "\$stbmac:$stbmac \n";
+        while ($rv) { 
+            $rv = stbmac_find(\$stbmac);
             select(undef,undef,undef,0.5);# sleep 500ms 
         }
+
         $dump_part_of_pack .= " ether host ".$stbmac;
         $rv = system($dump_part_of_pack) ;
     } else {
@@ -64,14 +63,15 @@ sub stbmac_find {
     my @line= split("\n\n",`cat stb_info.txt`);
     my $ipdmac_match = 0;
 
+    print "*" x 80,"\n";
     foreach (@line) {
         if ($_ =~ /ipt_id\=(([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2})/io) {
             next if $1 ne $iptmac;
-            if ($_ =~ /stb_id\=(([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2})/io) {
-                $$stbmac = $1;
-                if ($$stbmac eq " ") {
+            if (defined $$stbmac ) {
                     return -1;
-                }
+             }
+            if ($_ =~ /stb_mac\=(([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2})/io) {
+                $$stbmac = $1;
                 return 0;
             }
         }
@@ -84,6 +84,7 @@ sub tcpdump_stop{
 
     get_tcpdump_pid(\@pid);
     foreach $value (@pid) {
+        print "pid:$value \n";
         system("kill $value");
     } 
 }
@@ -97,12 +98,13 @@ sub get_tcpdump_pid {
     my @formatted_data = ();
 
     for ($i = 0;$i < $index;$i++) {
-        $tmp = join " ",unpack("A13x33A*",$line[$i]);
+        $tmp = join " ",unpack("A15x33A*",$line[$i]);
         push(@formatted_data,$tmp);
     }
 
     foreach(@formatted_data) {
-        if ( $_ =~ /root\s+(\d+)\s+tcpdump/o) {
+        if ( $_ =~ /tcpdump\s+(\d+)\s+tcpdump/o) {
+       #if ( $_ =~ /root\s+(\d+)\s+tcpdump/o) {
             push(@$pid,$1);
         }
     }
@@ -113,6 +115,7 @@ sub usage {
 }
 
 sub show_error {
+    print "show_error:$! \n";
     return 0;
 }
 
