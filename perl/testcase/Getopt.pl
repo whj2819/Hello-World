@@ -7,6 +7,7 @@ my $all = '';
 my $tag = ''; 
 my $libfiles= ''; 
 my @coor = () ; 
+my %defines = ();
 
 
 GetOptions (
@@ -14,7 +15,12 @@ GetOptions (
     'all'        => \$all,
     'tag=s'      => \$tag,
     'librarys=s@' =>\$libfiles,
-    'coordinates=f{2}' =>\@coor
+    'coordinates=f{2}' =>\@coor,
+    'defines=s'   => \%defines
 );
 
-print "\@coordinates:@coor\n";
+=pon
+while (( $key,$value) = each %defines) {
+    print"$key => $value \n";
+}
+=cut
