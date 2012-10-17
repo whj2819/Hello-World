@@ -5,7 +5,7 @@ use warnings;
 
 my ($cmd,@args) = @ARGV; 
 my $package_name = "$$.cap";
-my $dump_all_of_pack = "tcpdump -i p2p1 -w /tmp/$package_name -c 10000 -s 1600 ";
+my $dump_all_of_pack = "tcpdump -i eth0 -w /tmp/$package_name -c 10000 -s 1600 ";
 my $dump_part_of_pack = $dump_all_of_pack;
 
 
