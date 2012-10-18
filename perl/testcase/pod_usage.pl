@@ -1,34 +1,22 @@
 #!/usr/bin/perl
 
 use Pod::Usage;
+use Getopt::Long;
+
 use strict;
 use warnings;
 
-my $message_text = "This text precedes the usage message.";
-my $exit_status = 2;
-my $verbose_level = 0;
-my $filehandle = \*STDERR;
+my $opt_help = 0;
+my $opt_man = 0;
 
-pod2usage($message_text);
-pod2usage($exit_status);
+GetOptions (
+    "help",
+    "man",
+    "flag1"
+) || pod2usage(2);
 
-pod2usage(
-    {
-        -message    => $message_text,
-        -exitval    => $exit_status,
-        -verbose    => $verbose_level,
-        -output     => $filehandle
-    }
-);
+pod2usage(1) if ($opt_help);
+pod2usage(-verbose => 2) if ($opt_man);
 
-pod2usage(
-        -msg    => $message_text,
-        -exitval    => $exit_status,
-        -verbose    => $verbose_level,
-        -output     => $filehandle
-);
-
-pod2usage(
-        -verbose    => 2,
-        -noperdoc   => 1 
-);
+print "\@ARGV:@ARGV \n";
+pod2usage("$0: Too many files given.\n") if (@ARGV > 1);
