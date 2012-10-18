@@ -1,26 +1,32 @@
 #!/usr/bin/perl
 
-use Getopt::Long;
 
-my $verbose = '';
-my $all = '';
-my $tag = ''; 
-my $libfiles= ''; 
-my @coor = () ; 
-my %defines = ();
+use strict;
+use warnings;
+
+use Getopt::Long;
+use Pod::Usage;
+
+my $verbose = 0;
+my $debug = 0;
+my %h = (
+    'verbose'    => \$verbose,
+    'debug'      => \$debug
+);
 
 
 GetOptions (
-    'verbose+'   => \$verbose,# option variable with default value (false)
-    'all'        => \$all,
-    'tag=s'      => \$tag,
-    'librarys=s@' =>\$libfiles,
-    'coordinates=f{2}' =>\@coor,
-    'defines=s'   => \%defines
+    \%h,
+    'verbose',
+    'debug',
+    'filter',
+    'size=i'
 );
 
-=pon
-while (( $key,$value) = each %defines) {
-    print"$key => $value \n";
+if ($verbose) {
+    print "\$verbose:$verbose \n";
 }
-=cut
+
+if (exists $h{filter}) {
+    print "option 'filter'  was specified....\n";
+}
