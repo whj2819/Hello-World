@@ -5,35 +5,40 @@ use warnings;
 use Getopt::Long qw(GetOptionsFromArray GetOptionsFromString);
 
 my $ret;
-my $ref;
 my $value = '';
-my @array = qw(arg1 arg2 arg3,arg5);
-my $verbose  = 0;
+my @array = qw(arg1 arg2 arg3 arg5);
+my $verbose  = '';
 my $debug= 0;
+
+$ret = GetOptions(
+    'verbose!'    => \$verbose,
+    'debug'
+);
 
 my %h = (
     'verbose'    => \$verbose,
     'debug'      => \$debug
 );
+
+=pon
 $ret = GetOptionsFromArray(
     \@array,
-    \%h,
-    'verbose',
-    'value!'   => \$value
+    'verbose!' =>  \$verbose,
+    'debug'
 );
+=cut
 
 print "\@array:@array\n\n";
-print "\$value:$value\n\n";
 print "\$verbose:$verbose\n\n";
 print "\$debug:$debug\n\n";
 
-if ($verbose) {
-    print "___----- \n";
+__END__
+if (exists $h{'verbose'}) {
+    print "__exists_----- \n";
 } else {
-    print "_++++++++++++-- \n";
+    print "_+not exists+++++++++++-- \n";
 }
 
-__END__
 my $ret;
 my $string = "arg1 arg2 arg3"; 
 my $args = 0;
