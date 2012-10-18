@@ -1,32 +1,16 @@
 #!/usr/bin/perl
 
-
 use strict;
 use warnings;
-
 use Getopt::Long;
-use Pod::Usage;
 
-my $verbose = 0;
-my $debug = 0;
-my %h = (
-    'verbose'    => \$verbose,
-    'debug'      => \$debug
-);
+my $width = 80;
+sub process {
+    print "Hello process @_ and \n";
+}
 
-
+# argument callback
 GetOptions (
-    \%h,
-    'verbose',
-    'debug',
-    'filter',
-    'size=i'
+    'width=i'    =>\$width,
+    '<>'         =>\&process
 );
-
-if ($verbose) {
-    print "\$verbose:$verbose \n";
-}
-
-if (exists $h{filter}) {
-    print "option 'filter'  was specified....\n";
-}
