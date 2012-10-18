@@ -5,6 +5,8 @@ use warnings;
 use Getopt::Long qw(GetOptionsFromArray);
 
 my $mac = 0;
+my ($cmd,@args) = @ARGV;
+
 sub tcpdump_start {
     print "tcpdump start _____\n";
 }
@@ -12,9 +14,13 @@ sub tcpdump_start {
 sub tcpdump_stop{
     print "tcpdump stop _____\n";
 }
-sub netcap{
-    print "netcap \n";
 
+sub stbmac_find {
+    print "stbmac_find \n\n";
+}
+
+sub netcap{
+    print "netcap @args\n";
 =pon
     GetOptionsFromArray(
         \@_,
@@ -22,16 +28,24 @@ sub netcap{
         'stop',
         'mac=s'      => \$mac
     );
-    #stbmac_find(\$mac);
+    stbmac_find(\$mac);
     print "\@_ @_ \n";
+my %h = (
+    'start'    => \&tcpdump_start,
+    'stop'     =>\&tcpdump_stop
+);
 =cut
+
 GetOptions(
-        'start'    => \&tcpdump_start,
-        'stop'     =>\&tcpdump_stop,
-        'mac=s'    => \$mac
-    );
-    #stbmac_find(\$mac);
-    print "___________ $mac \n";
+    'start'    => \&tcpdump_start,
+    'stop'     =>\&tcpdump_stop,
+    'mac=s'    => \$mac
+);
+if ($args[0] eq '--start') {
+    print "+++++++++++++++ \n";
+    stbmac_find(\$mac);
+}
+print "___________ $mac \n";
 }
 
 if (exists $ARGV[0]) {
