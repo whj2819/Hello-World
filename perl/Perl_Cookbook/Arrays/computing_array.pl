@@ -16,7 +16,7 @@ my %count = ();
 
 my $e;
 
-
+=pon
 foreach $e (@a,@b) {
     $count{$e}++
 }
@@ -29,19 +29,21 @@ foreach $e (keys %count) {
         push @diff,$e;
     }
 }
+=cut
+
+foreach $e (@a,@b) {
+    $count{$e}++
+}
+@union = keys %count;
+
+foreach $e (keys %count) {
+    push @{$count{$e} == 2 ? \@isect:\@diff},$e; 
+}
 
 
+print "\@union:@union \n";
 print "\@isect:@isect\n";
 print "\@diff:@diff\n";
-
-
-
-
-
-
-
-
-
 
 
 =pon
