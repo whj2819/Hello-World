@@ -19,8 +19,6 @@ sub stbmac_find {
     print "stbmac_find \n\n";
 }
 
-sub netcap{
-    print "netcap @args\n";
 =pon
     GetOptionsFromArray(
         \@_,
@@ -36,16 +34,20 @@ my %h = (
 );
 =cut
 
-GetOptions(
-    'start'    => \&tcpdump_start,
-    'stop'     =>\&tcpdump_stop,
-    'mac=s'    => \$mac
-);
-if ($args[0] eq '--start') {
-    print "+++++++++++++++ \n";
-    stbmac_find(\$mac);
-}
-print "___________ $mac \n";
+sub netcap{
+    print "netcap @args\n";
+
+
+    GetOptions(
+        'start'    => \&tcpdump_start,
+        'stop'     =>\&tcpdump_stop,
+        'mac=s'    => \$mac
+    );
+    if ($args[0] eq '--start') {
+        print "+++++++++++++++ \n";
+        stbmac_find(\$mac);
+    }
+    print "___________ $mac \n";
 }
 
 if (exists $ARGV[0]) {
