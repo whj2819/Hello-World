@@ -5,12 +5,22 @@ use warnings;
 use Getopt::Long;
 
 my $width = 80;
-sub process {
-    print "Hello process @_ and \n";
+my $value = 10;
+my $mac = 0;
+
+my ($cmd,@args) = @ARGV;
+sub tcpdump_start{
+    print "\@args :@args \n";
+    print "Hello process @_ \n";
 }
 
+if ($cmd eq "netcap") {
 # argument callback
-GetOptions (
-    'width=i'    =>\$width,
-    '<>'         =>\&process
-);
+    GetOptions (
+        'start'         =>\&tcpdump_start,
+        'mac=s'      =>\$mac,
+    );
+
+} else {
+    print "+++++++++++++++++++++\n";
+}
