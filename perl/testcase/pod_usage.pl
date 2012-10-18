@@ -1,46 +1,34 @@
 #!/usr/bin/perl
 
-use Getopt::Long;
 use Pod::Usage;
+use strict;
+use warnings;
 
-my $man = 0;
-my $help = 0;
+my $message_text = "This text precedes the usage message.";
+my $exit_status = 2;
+my $verbose_level = 0;
+my $filehandle = \*STDERR;
 
-GetOptions('help|?' => \$help, man => \$man) or pod2usage(2);
-            pod2usage(1) if $help;
-            pod2usage(-exitstatus => 0, -verbose => 2) if $man;
+pod2usage($message_text);
+pod2usage($exit_status);
 
-__END__
+pod2usage(
+    {
+        -message    => $message_text,
+        -exitval    => $exit_status,
+        -verbose    => $verbose_level,
+        -output     => $filehandle
+    }
+);
 
-=head1 NAME
+pod2usage(
+        -msg    => $message_text,
+        -exitval    => $exit_status,
+        -verbose    => $verbose_level,
+        -output     => $filehandle
+);
 
-sample - Using Getopt::Long and Pod::Usage
-
-=head1 SYNOPSIS
-
-sample [options] [file ...]
-
-Options:
--help            brief help message
--man             full documentation
-
-=head1 OPTIONS
-
-=over 8
-
-=item B<-help>
-
-Print a brief help message and exits.
-
-=item B<-man>
-
-Prints the manual page and exits.
-
-=back
-
-=head1 DESCRIPTION
-
-B<This program> will read the given input file(s) and do something
-useful with the contents thereof.
-
-=cut
+pod2usage(
+        -verbose    => 2,
+        -noperdoc   => 1 
+);
