@@ -6,29 +6,34 @@ use Getopt::Long qw(GetOptionsFromArray GetOptionsFromString);
 
 my $ret;
 my $value = '';
-my @array = qw(arg1 arg2 arg3 arg5);
+#my @array = qw(arg1 arg2 arg3 arg5);
+my($cmd,@array) = @ARGV;
 my @tmp= qw(arg9 arg1 arg3 arg5);
 my $verbose  = '';
 my $debug= 0;
 
+=pon
 $ret = GetOptions(
     'verbose=i'    => \$verbose,
     'debug'
 );
+=cut
 
 my %h = (
     'verbose'    => \$verbose,
     'debug'      => \$debug
 );
 
-=pon
+sub start {
+    print "______________________ start \n";
+}
+
 $ret = GetOptionsFromArray(
     \@array,
-    'verbose=i' =>  \$verbose,
+    'start' =>  \&start,
 ) || die "xxxxxxx \n";
-=cut
+
 print "\@array:@array\n\n";
-print "\@array:@tmp\n\n";
 print "\$verbose:$verbose\n\n";
 print "\$debug:$debug\n\n";
 print "$ret +========== \n\n";
