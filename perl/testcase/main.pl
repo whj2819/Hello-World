@@ -15,19 +15,23 @@ sub tcpdump_stop{
 sub netcap{
     print "netcap \n";
 
-    my %h = (
-        'start'    => \&tcpdump_start,
-        'stop'     => \&tcpdump_stop,
-    );
-
+=pon
     GetOptionsFromArray(
         \@_,
-        \%h,
         'start',
         'stop',
         'mac=s'      => \$mac
     );
+    #stbmac_find(\$mac);
     print "\@_ @_ \n";
+=cut
+GetOptions(
+        'start'    => \&tcpdump_start,
+        'stop'     =>\&tcpdump_stop,
+        'mac=s'    => \$mac
+    );
+    #stbmac_find(\$mac);
+    print "___________ $mac \n";
 }
 
 if (exists $ARGV[0]) {
