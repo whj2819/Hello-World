@@ -16,6 +16,34 @@ my %count = ();
 
 my $e;
 
+
+foreach $e (@a,@b) {
+    $count{$e}++
+}
+
+@union = keys %union;
+foreach $e (keys %count) {
+    if ($count{$e} == 2) {
+        push @isect,$e;
+    } else {
+        push @diff,$e;
+    }
+}
+
+
+print "\@isect:@isect\n";
+print "\@diff:@diff\n";
+
+
+
+
+
+
+
+
+
+
+
 =pon
 # method
 foreach $e (@a) {
