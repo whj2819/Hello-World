@@ -16,6 +16,8 @@ my %count = ();
 
 my $e;
 
+=pon
+# method
 foreach $e (@a) {
     $union{$e} = 1
 }
@@ -27,9 +29,16 @@ foreach $e (@b) {
 
     $union{$e} = 1;
 }
+=cut
+
+=pon
+foreach $e (@a,@b) {
+    $union{$e}++ && $isect{$e}++
+}
 
 @union = keys %union;
 @isect= keys %isect;
 
 print "\@union:@union \n";
 print "\@isect:@isect\n";
+=cut
