@@ -18,9 +18,7 @@ if ($cmd eq "netcap") {
 # argument callback
     GetOptions (
         'start'         =>\&tcpdump_start,
-        'mac=s'      =>\$mac,
+        'stop'          =>\&tcpdump_stop,
+        'mac=s'         =>\$mac,
     );
-
-} else {
-    print "+++++++++++++++++++++\n";
 }
