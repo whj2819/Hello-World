@@ -2,13 +2,40 @@
 
 use strict;
 use warnings;
-#use Getopt::Long qw(GetOptionsFromArray GetOptionsFromString);
-use Getopt::Long qw(GetOptionsFromString);
-
+use Getopt::Long qw(GetOptionsFromArray GetOptionsFromString);
 
 my $ret;
+my $ref;
+my $value = '';
+my @array = qw(arg1 arg2 arg3,arg5);
+my $verbose  = 0;
+my $debug= 0;
+
+my %h = (
+    'verbose'    => \$verbose,
+    'debug'      => \$debug
+);
+$ret = GetOptionsFromArray(
+    \@array,
+    \%h,
+    'verbose',
+    'value!'   => \$value
+);
+
+print "\@array:@array\n\n";
+print "\$value:$value\n\n";
+print "\$verbose:$verbose\n\n";
+print "\$debug:$debug\n\n";
+
+if ($verbose) {
+    print "___----- \n";
+} else {
+    print "_++++++++++++-- \n";
+}
+
+__END__
+my $ret;
 my $string = "arg1 arg2 arg3"; 
-my $string2 = "arg4 arg5 arg6"; 
 my $args = 0;
 my $args2 = 0;
 sub help {
@@ -16,12 +43,11 @@ sub help {
 }
 ($ret,$args) = GetOptionsFromString(
     $string,
-    'help'   => \&help,
+    'help'   => \&help
 );
 
 print "___ $string _+++__ @$args \n";
 
-__END__
 my $width = 80;
 my $value = 10;
 my $mac = 0;
