@@ -9,6 +9,35 @@ my $package_name = "$$.cap";
 my $dump_all_of_pack = "tcpdump -i eth0 -w /tmp/$package_name -c 10000 -s 1600 ";
 my $dump_part_of_pack = $dump_all_of_pack;
 
+sub get_tcpdump_pid {
+    my $pid = shift(@_);
+    my @line =split("\n", `ps -ef | grep tcpdump | grep -v grep`);
+    my $index = $#line + 1;
+    my $i;
+    my $tmp;
+    my @formatted_data = ();
+
+    for ($i = 0;$i < $index;$i++) {
+        $tmp = join " ",unpack("A13x33A*",$line[$i]);
+        push(@formatted_data,$tmp);
+    }
+
+    foreach(@formatted_data) {
+        if ( $_ =~ /root\s+(\d+)\s+tcpdump/o) {
+            push(@$pid,$1);
+        }
+    }
+}
+
+sub tcpdump_stop{
+    my @pid = ();
+    my $value;
+
+    get_tcpdump_pid(\@pid);
+    foreach $value (@pid) {
+        system("kill $value");
+    }
+}
 
 sub stbmac_find {
     my $index;
