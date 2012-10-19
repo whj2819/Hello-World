@@ -5,23 +5,40 @@ use warnings;
 use Getopt::Long qw(GetOptionsFromArray);
 
 my ($cmd,@args) = @ARGV;
+my $package_name = "$$.cap";
+my $dump_all_of_pack = "tcpdump -i eth0 -w /tmp/$package_name -c 10000 -s 1600 ";
+my $dump_part_of_pack = $dump_all_of_pack;
+
 
 sub stbmac_find {
     print "stbmac_find \n\n";
 }
 
 sub tcpdump_start {
+    my $rv= 0;
+    my $stbmac = 0;
+    my $iptmac = $args[2];
+    if ($iptmac) { # IPTMAC is not null;
+        $rv = stbmac_find(\$stbmac);
+        print "______\$stbmac:$stbmac \$rv:$rv \n";
+        while ($rv) {
+            $rv = stbmac_find(\$stbmac);
+            select(undef,undef,undef,0.5);# sleep 500ms
+        }
+
+        $dump_part_of_pack .= " ether host ".$stbmac;
+        $rv = system($dump_part_of_pack) ;
+    } else {
+        $rv =system($dump_all_of_pack);
+    }
     print "tcpdump start _____\n";
     print "\$cmd:$cmd,\@args:@args \n";
-    print "\$mac-------------- $mac \n\n";
+
+    return $rv;
 }
 
 sub tcpdump_stop{
     print "tcpdump stop _____\n";
-}
-
-sub stbmac_find {
-    print "stbmac_find \n\n";
 }
 
 sub do_netcap{
@@ -39,10 +56,6 @@ sub do_netcap{
         'mac=s',
         'stop',
     );
-    print "start=>$h{start} \n";
-    if (exists $h{mac}) {
-        print "___________ mac=>$h{mac} \n";
-    }
 }
 
 my $func_name = "do_$ARGV[0]";
