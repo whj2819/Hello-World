@@ -11,13 +11,35 @@ my $dump_part_of_pack = $dump_all_of_pack;
 
 
 sub stbmac_find {
-    print "stbmac_find \n\n";
+    my $index;
+    my $iptmac = $args[2];
+    my $stbmac = shift(@_);
+    my @line= split("\n\n",`~/ipgdctl stb.list`);
+
+    print "*" x 80,"\n";
+    foreach (@line) {
+        if ($_ =~ /ipt_id\=(([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2})/io) {
+            next if $1 ne $iptmac;
+            if ($_ =~ /stb_mac\=(([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2})/io) {
+                $$stbmac = $1;
+                return 0;
+            }
+            if (defined $$stbmac ) {
+                return -1; # stbmac is null;
+            }
+        }
+    }
+    print "This IPT MAC is not exist.\n";
+    exit 1;
 }
 
 sub tcpdump_start {
     my $rv= 0;
     my $stbmac = 0;
     my $iptmac = $args[2];
+
+    print "tcpdump start _____\n";
+    print "\$cmd:$cmd,\@args:@args \n";
     if ($iptmac) { # IPTMAC is not null;
         $rv = stbmac_find(\$stbmac);
         print "______\$stbmac:$stbmac \$rv:$rv \n";
@@ -31,8 +53,6 @@ sub tcpdump_start {
     } else {
         $rv =system($dump_all_of_pack);
     }
-    print "tcpdump start _____\n";
-    print "\$cmd:$cmd,\@args:@args \n";
 
     return $rv;
 }
