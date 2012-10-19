@@ -4,11 +4,12 @@ use strict;
 use warnings;
 use Getopt::Long qw(GetOptionsFromArray);
 
-my $mac = 0;
 my ($cmd,@args) = @ARGV;
 
 sub tcpdump_start {
     print "tcpdump start _____\n";
+    print "\$cmd:$cmd,\@args:@args \n";
+    #stbmac_find
 }
 
 sub tcpdump_stop{
@@ -19,42 +20,50 @@ sub stbmac_find {
     print "stbmac_find \n\n";
 }
 
-=pon
-    GetOptionsFromArray(
-        \@_,
-        'start',
-        'stop',
-        'mac=s'      => \$mac
-    );
-    stbmac_find(\$mac);
-    print "\@_ @_ \n";
-my %h = (
-    'start'    => \&tcpdump_start,
-    'stop'     =>\&tcpdump_stop
-);
-=cut
-
-sub netcap{
+sub do_netcap{
     print "netcap @args\n";
 
-
-    GetOptions(
+    my %h = (
         'start'    => \&tcpdump_start,
         'stop'     =>\&tcpdump_stop,
-        'mac=s'    => \$mac
     );
-    if ($args[0] eq '--start') {
-        print "+++++++++++++++ \n";
-        stbmac_find(\$mac);
+
+    GetOptionsFromArray(
+        \@_,
+        \%h,
+        'start',
+        'mac=s',
+        'stop',
+    );
+    print "start=>$h{start} \n";
+    if (exists $h{mac}) {
+        print "___________ mac=>$h{mac} \n";
     }
-    print "___________ $mac \n";
 }
 
+my $func_name = "do_$ARGV[0]";
 if (exists $ARGV[0]) {
-    if (exists $main::{"${ARGV[0]}"}) {
-        my $rv =$main::{"${ARGV[0]}"}(@ARGV[1 .. $#ARGV]);
+    if (exists $main::{$func_name}) {
+        my $rv =$main::{$func_name}(@ARGV[1 .. $#ARGV]);
+        if ($rv < 0) {
+            exit (-$rv); 
+        }
     }
+    exit 0;
 }
 
+=pon
+if (exists $ARGV[0]) {
+    if (exists $main::{"do_${ARGV[0]}"}) {
+        my $rv =$main::{"do_${ARGV[0]}"}(@ARGV[1 .. $#ARGV]);
+        if ($rv < 0) {
+            exit (-$rv); 
+        }
+    }
+    exit 0;
+}
+=cut
 
-print "\@ARGV   @ARGV  \n";
+print STDERR "[global]\n";
+print STDERR "error = unknown command \n";
+exit 1;
