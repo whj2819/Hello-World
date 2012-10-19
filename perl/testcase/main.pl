@@ -6,10 +6,14 @@ use Getopt::Long qw(GetOptionsFromArray);
 
 my ($cmd,@args) = @ARGV;
 
+sub stbmac_find {
+    print "stbmac_find \n\n";
+}
+
 sub tcpdump_start {
     print "tcpdump start _____\n";
     print "\$cmd:$cmd,\@args:@args \n";
-    #stbmac_find
+    print "\$mac-------------- $mac \n\n";
 }
 
 sub tcpdump_stop{
@@ -51,18 +55,6 @@ if (exists $ARGV[0]) {
     }
     exit 0;
 }
-
-=pon
-if (exists $ARGV[0]) {
-    if (exists $main::{"do_${ARGV[0]}"}) {
-        my $rv =$main::{"do_${ARGV[0]}"}(@ARGV[1 .. $#ARGV]);
-        if ($rv < 0) {
-            exit (-$rv); 
-        }
-    }
-    exit 0;
-}
-=cut
 
 print STDERR "[global]\n";
 print STDERR "error = unknown command \n";
