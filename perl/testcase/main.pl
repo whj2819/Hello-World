@@ -86,10 +86,6 @@ sub tcpdump_start {
     return $rv;
 }
 
-sub tcpdump_stop{
-    print "tcpdump stop _____\n";
-}
-
 sub do_netcap{
     print "netcap @args\n";
 
@@ -102,9 +98,9 @@ sub do_netcap{
         \@_,
         \%h,
         'start',
-        'mac=s',
         'stop',
-    );
+        'mac=s',
+    ) || usage();
 }
 
 my $func_name = "do_$ARGV[0]";
@@ -118,6 +114,12 @@ if (exists $ARGV[0]) {
     exit 0;
 }
 
+sub usage {
+
+}
+
 print STDERR "[global]\n";
 print STDERR "error = unknown command \n";
 exit 1;
+
+
