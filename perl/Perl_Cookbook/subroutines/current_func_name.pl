@@ -1,0 +1,20 @@
+#!/use/bin/perl
+
+#use strict;
+#use warnings;
+
+
+($package,$filename,$line,$subr,$has_args,$wantarray,
+    $evaltext,$is_require,$hints,$bitmask
+) = caller($i);
+
+print "\$package:$package\n";
+print "\$filename:$filename\n";
+print "\$line: $line\n";
+print "\$subr: $subr\n";
+print "\$has_args: $has_args\n";
+print "\$wantaray: $wantarray\n";
+print "\$evaltext: $evaltext\n";
+print "\$is_require: $is_require\n";
+print "\$hints: $hints\n";
+print "\$bitmask: $bitmask\n";
