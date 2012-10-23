@@ -27,6 +27,21 @@ $HoH{mash} = {
     corporal   => "radar",
 };
 
+my $family;
+my $roles;
+my $role;
+my $person;
+
+while (($family,$roles) = each %HoH) {
+    print "$family";
+    while (($role,$person) = each %$roles) {
+        print "$role = $person ";
+    }
+    print "\n\n";
+}
+
+
+__END__
 for my $family (keys %HoH) {
     print "$family:\n";
     for my $role (keys $HoH{$family}) {
