@@ -10,7 +10,6 @@ my %HoA = (
 );
 
 my $family = 0;
-my $i;
 =pon
 foreach $family (keys %HoA) {
     print "$family:@{$HoA{$family}} \n";
@@ -19,7 +18,7 @@ foreach $family (keys %HoA) {
 
 foreach $family (keys %HoA) {
     print "$family:\n";
-    for $i (0 .. $#{$HoA{$family}}) {
+    for my $i (0 .. $#{$HoA{$family}}) {
         print "$i = $HoA{$family}[$i]";
     }
     print "\n";
