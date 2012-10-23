@@ -18,4 +18,5 @@ my $ref_to_AoA = [
 ];
 
 print $ref_to_AoA->[2][3],"\n";
+print $ref_to_AoA->[2]->[3],"\n";
 
