@@ -4,6 +4,7 @@ use strict;
 use warnings;
 
 
+# hashes of hashes
 my %HoH = (
     flintstones => {
         husband     => "fred",
