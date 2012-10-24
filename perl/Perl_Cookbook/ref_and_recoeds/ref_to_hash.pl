@@ -28,3 +28,6 @@ print "\@keys:@keys \n";
 
 my $value = $href->{key2};
 print "\$value:$value \n";
+
+my @values = @$href{"key","key2"};
+print "\@values:@values \n";
