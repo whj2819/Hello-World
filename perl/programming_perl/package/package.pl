@@ -1,12 +1,26 @@
 #!/usr/bin/perl
 
-#use strict;
-#use warnings;
+use strict;
+use warnings;
+
+sub identify_typeglob {
+    my $glob = shift;
+
+    print 'You gave me ',*{$glob}{PACKAGE}, '::',*{$glob}{NAME},"\n";
+}
+
+identify_typeglob(*foo);
+identify_typeglob(*bar::glarch);
+
+
+
+
+
+
+__END__
 
 *PI = \3.14;
 print $PI,"\n";
-
-__END__
 *units = populate();
 print $units{kg},"\n";
 
