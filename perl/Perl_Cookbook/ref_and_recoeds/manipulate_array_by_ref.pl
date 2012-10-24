@@ -11,3 +11,6 @@ my $ano_copy= [@array];
 print $aref->[5],"\n";
 print $ano_array->[3],"\n";
 print $ano_copy->[5],"\n";
+
+push(@$ano_array,11);
+print $ano_array->[8],"\n";
