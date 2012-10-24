@@ -25,3 +25,6 @@ print "$anon_copy->{key2} \n";
 
 my @keys = sort keys %$anon_hash;
 print "\@keys:@keys \n";
+
+my $value = $href->{key2};
+print "\$value:$value \n";
