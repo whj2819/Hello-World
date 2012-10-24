@@ -3,7 +3,10 @@
 #use strict;
 #use warnings;
 
+*PI = \3.14;
+print $PI,"\n";
 
+__END__
 *units = populate();
 print $units{kg},"\n";
 
