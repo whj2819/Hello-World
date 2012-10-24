@@ -9,6 +9,7 @@ my $ano_array= [1,2,3,4,5,6,7,8];
 my $ano_copy= [@array];
 
 
+print "@{$aref} \n";
 
 
 
