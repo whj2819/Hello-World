@@ -1,10 +1,9 @@
-package Bestiary;
+package Bestiary 1.001;
 require Exporter;
 
 our @ISA = qw(Exporter);
 our @EXPORT = qw(camel);
 our @EXPORT_OK = qw(test $weight);
-our $version = 1.00;
 
 sub camel {
     print "One-hump dromedary \n";

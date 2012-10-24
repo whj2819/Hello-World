@@ -1,12 +1,9 @@
 #!/usr/bin/perl
 
-use Bestiary qw(camel test $weight);
+use Bestiary  qw(camel test);
 
 
 camel();
-test();
 
-my $w = $weight;
-print "$w ++++---- \n";
 
 
