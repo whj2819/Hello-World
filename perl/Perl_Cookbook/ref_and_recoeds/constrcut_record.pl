@@ -11,3 +11,7 @@ my $recode = {
     SALARY  => 37_000,
     PALS    => ["Norbert","Rhys","Phineas"],
 };
+
+printf "I am %s,and my pals are %s.\n",
+$recode->{NAME},
+join(", ",@{$recode->{PALS}});
