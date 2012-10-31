@@ -1,5 +1,4 @@
 package Horse;
-    
 
 sub new {
     my $this = shift;
