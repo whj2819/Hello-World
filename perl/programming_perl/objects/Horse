@@ -1,0 +1,11 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use Horse;
+
+my $steed = Horse->new(
+    name    => "shadowfax",
+    color   => "white"
+);
