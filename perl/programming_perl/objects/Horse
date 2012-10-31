@@ -5,12 +5,12 @@ use warnings;
 
 use Horse;
 
-my $steed = Horse->new(
-    name    => "shadowfax",
-    color   => "white"
-);
-
-my $ed = Horse->new;
-my $stallion = Horse->new(color    => "black");
+#my $ed = Horse->new;
+#my $stallion = Horse->new(color => "black");
 
 #$stallion->__print();
+
+
+my $steed = Horse->new(color =>"dun");
+my $foal = $steed->clone(owner => "EquuGen Guild,Ltd");
+#my $test = Horse->__print("Hello"); 
