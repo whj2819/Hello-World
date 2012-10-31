@@ -1,8 +1,10 @@
 package Critter;
 
 sub spawn {
+    my $class = shift;
+    print "\$class:$class \n";
     my $self = {};
-    bless $self,"Critter";
+    bless ($self,$class);
     return $self;
 }
 

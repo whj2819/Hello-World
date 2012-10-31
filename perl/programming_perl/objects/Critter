@@ -1,0 +1,8 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use Critter;
+
+my $vermin = Critter->spawn;
+#my $shelob = Spider->spawn;
