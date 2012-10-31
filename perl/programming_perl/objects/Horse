@@ -13,4 +13,4 @@ use Horse;
 
 my $steed = Horse->new(color =>"dun");
 my $foal = $steed->clone(owner => "EquuGen Guild,Ltd");
-#my $test = Horse->__print("Hello"); 
+my $test = Horse->__print("Hello"); 
