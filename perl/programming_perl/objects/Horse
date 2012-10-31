@@ -9,3 +9,8 @@ my $steed = Horse->new(
     name    => "shadowfax",
     color   => "white"
 );
+
+my $ed = Horse->new;
+my $stallion = Horse->new(color    => "black");
+
+#$stallion->__print();
