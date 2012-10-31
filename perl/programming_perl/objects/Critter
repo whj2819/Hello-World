@@ -4,5 +4,7 @@ use strict;
 use warnings;
 use Critter;
 
-my $vermin = Critter->spawn;
+my $type = "Critter";
+my $vermin = $type->spawn;
+$vermin->spawn;
 #my $shelob = Spider->spawn;

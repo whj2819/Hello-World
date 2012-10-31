@@ -1,7 +1,8 @@
 package Critter;
 
 sub spawn {
-    my $class = shift;
+    my $this = shift;
+    my $class = ref($this) || $this;# Object or class name
     print "\$class:$class \n";
     my $self = {};
     bless ($self,$class);
