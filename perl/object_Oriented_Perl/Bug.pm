@@ -11,6 +11,12 @@ sub new {
     },$_[0];
 }
 
+sub test{
+    my ($self,@args) = @_;
+    print "\$self:$self,\@args:@args \n"
+
+}
+
 
 =pon
 sub new {

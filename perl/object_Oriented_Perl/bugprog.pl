@@ -10,6 +10,7 @@ my $type = 2;
 my $description = "This is a test";
 #package main;
 my $nextbug = Bug->new($id,$type,$description);
+$nextbug->test(12345);
 
 
 __END__

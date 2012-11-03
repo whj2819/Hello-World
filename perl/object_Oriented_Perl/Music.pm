@@ -53,3 +53,6 @@ sub rating {
     $self->{_rating} = $rating if defined $rating ;
     return $self->{_rating};
 }
+
+
+1; # make requires happy
