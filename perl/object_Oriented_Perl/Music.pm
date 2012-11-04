@@ -8,14 +8,10 @@ use strict;
         $_count
     }
 
-    my $_incr_count = sub _incr_count {
-                            ++$_count
-                        }
-
     sub new {
         my ($class) = @_;
 
-        _incr_count->();
+        ++$count;
         bless {
             _name=> $_[1],
             _artist=> $_[2],
