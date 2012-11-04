@@ -24,7 +24,7 @@ my $me = whoami();
 my $him = whowasi();
 
 sub whoami {
-    (caller(2))[1]
+    (caller(2))[3]
 }
 
 sub whowasi {
@@ -37,7 +37,8 @@ sub test {
 
 sub tmp {
     my $test = whoami();
-    print "\$test:$test\n";
+    print "\$test -- $test\n";
 }
 
 test();
+
