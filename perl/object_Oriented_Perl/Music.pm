@@ -1,43 +1,55 @@
 package CD::Music;
 use strict;
 
-sub new {
-    my ($class) = @_;
+{
+    my $_count = 0;
 
-    bless {
-        _name=> $_[1],
-        _artist=> $_[2],
-        _publisher=> $_[3],
-        _ISBN=> $_[4],
-        _tracks=> $_[5],
+    sub get_count {
+        $_count
+    }
+
+    my $_incr_count = sub _incr_count {
+                            ++$_count
+                        }
+
+    sub new {
+        my ($class) = @_;
+
+        _incr_count->();
+        bless {
+            _name=> $_[1],
+            _artist=> $_[2],
+            _publisher=> $_[3],
+            _ISBN=> $_[4],
+            _tracks=> $_[5],
         _room=> $_[6],
         _shelf=> $_[7],
         _rating=> $_[8],
     },$class;
 }
 
-
-sub name {
+}
+sub get_ name {
     $_[0] -> {_name}
 );
 
-sub artist {
+sub get_artist {
     $_[0] ->{_artist}
 }
 
-sub publisher{
+sub get_publisher{
     $_[0] ->{_publisher}
 }
 
-sub ISBN{
+sub get_ISBN{
     $_[0] ->{_ISBN}
 }
 
-sub tracks{
+sub get_tracks{
     $_[0] ->{_tracks}
 }
 
-sub location {
+sub set_location {
     my ($self,$shelf,$room) = @_;
 
     $self->{_room} = $room if $room;
@@ -47,7 +59,7 @@ sub location {
 
 }
 
-sub rating {
+sub set_rating {
     my ($self,$rating)  = @_;
 
     $self->{_rating} = $rating if defined $rating ;
