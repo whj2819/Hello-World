@@ -1,6 +1,7 @@
 package CD::Music;
 use strict;
 
+
 {
     my $_count = 0;
 
