@@ -1,10 +1,10 @@
 include ../Make.defines
 
-PROGS = byteorder 
+PROGS = daytimetcpsrv1 
 
 all:    ${PROGS}
 
-byteorder:    byteorder.o
-	${CC} ${CFLAGS} -o $@ byteorder.o ${LIBS}
+byteorder:    daytimetcpsrv1.o
+	${CC} ${CFLAGS} -o $@ daytimetcpsrv1.o ${LIBS}
 clean:
 	rm -f ${PROGS} ${CLEANFILES}
