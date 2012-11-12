@@ -13,7 +13,7 @@ main(int argc,char **argv)
     bzero(&servaddr,sizeof(servaddr));
     servaddr.sin_family = AF_INET;
     servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    servaddr.sin_port = htons(SERV_POTR);
+    servaddr.sin_port = htons(SERV_PORT);
 
     bind(listenfd,(SA*)&servaddr,sizeof(servaddr));
 
@@ -21,11 +21,10 @@ main(int argc,char **argv)
 
     for (; ;) {
         clilen = sizeof(cliaddr);
-        connfd = accept(listenfd,(SA*)&clilen,sizeof(clilen));
+        connfd = accept(listenfd,(SA*)&clilen,&clilen);
 
         if ((childpid = fork() ) == 0) {
             close(listenfd);
-            close(connfd);
             str_echo(connfd);
             exit(0);
         }
