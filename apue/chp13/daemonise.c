@@ -37,4 +37,24 @@ daemonize(const char *cmd)
         printf("%s:can't fork\n",cmd);
     else if (pid != 0) 
         exit(0);
+
+    if (chdir("/") < 0)
+        printf("%s can't change Directory to / \n");
+
+    if (rl.rlim_max == RLIM_INFINITY)
+        rl.rlim_max = 1024;
+
+    for (i = 0;i < rl.rlim_max;i++) 
+        close (i);
+
+    fd0 = open("/dev/null",O_RDWR);
+    fd1 = dup(0);
+    fd2 = dup(0);
+
+    openlog(cmd,LOG_CONS,LOGDAEON);
+    if (fd0 != 0 || fd1 != 1 || fd2 != 2) {
+        syslog(LOG_ERR,"unexpected file descriptors %d %d %d",
+                fd0,fd1,fd2);
+        exit(1);
+    }
 }
