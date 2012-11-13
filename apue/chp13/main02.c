@@ -33,4 +33,30 @@ thr_fn(void *arg)
         syslog(LOG_INFO,"unexpected signal %d \n",signo);
     }
 
+    return 0;
+}
+
+
+int
+main(int argc ,char **argv)
+{
+    int    err;
+    pthread_t tid;
+    char *cmd;
+    struct sigaction sa;
+
+    if ((cmd = strrchr(argv[0],"/")) == NULL) 
+        cmd = argv[0];
+    else 
+        cmd++;
+
+    daemonize(cmd);
+
+    if (already_running()) {
+        syslog(LOG_INFO,"daemon already running");
+        exit(1);
+    }
+
+
+
 }
