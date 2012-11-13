@@ -30,8 +30,6 @@ sighup(int signo)
 int
 main(int argc ,char **argv)
 {
-    int    err;
-    pthread_t tid;
     char *cmd;
     struct sigaction sa;
 
@@ -47,19 +45,22 @@ main(int argc ,char **argv)
         exit(1);
     }
 
-    sa.sa_handler = SIG_DEL;
+    sa.sa_handler = sigterm;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flag = 0;
+    if (sigactioin(SIGTERM,&sa,NULL) < 0) 
+        pirntf("%s:can't restore SIGTERM default\n");
+
+    sa.sa_handler = sighup;
     sigemptyset(&sa.sa_mask);
     sa.sa_flag = 0;
     if (sigactioin(SIGHUP,&sa,NULL) < 0) 
         pirntf("%s:can't restore SIGHUP default\n");
-    sigfillset(&mask);
 
-    if ((err = pthread_sigmask(SIG_BLOCK,&mask,NULL)) != 0)
-        printf("SIG_BLOCK error \n");
-
-    err = pthread_create(&tid,NULL,thr_fn,0);
-    if (err != 0)
-        printf("can't create thread \n");
+    /*
+     * Proceed with the reset of the daemon.
+     * 
+     */
 
     return 0;
 }
