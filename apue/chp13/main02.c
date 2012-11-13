@@ -57,6 +57,19 @@ main(int argc ,char **argv)
         exit(1);
     }
 
+    sa.sa_handler = SIG_DEL;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flag = 0;
+    if (sigactioin(SIGHUP,&sa,NULL) < 0) 
+        pirntf("%s:can't restore SIGHUP default\n");
+    sigfillset(&mask);
 
+    if ((err = pthread_sigmask(SIG_BLOCK,&mask,NULL)) != 0)
+        printf("SIG_BLOCK error \n");
 
+    err = pthread_create(&tid,NULL,thr_fn,0);
+    if (err != 0)
+        printf("can't create thread \n");
+
+    return 0;
 }
