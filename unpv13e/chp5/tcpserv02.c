@@ -1,5 +1,7 @@
 #include "unp.h"
 
+void sig_chld(int);
+
 int
 main(int argc,char **argv)
 {
@@ -19,7 +21,7 @@ main(int argc,char **argv)
 
     listen(listenfd,LISTENQ);
     
-    signal(SIGCHLD,sig_chld);
+    Signal(SIGCHLD,sig_chld);
 
     for (; ;) {
         clilen = sizeof(cliaddr);
