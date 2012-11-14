@@ -1,9 +1,11 @@
 #include "unp.h"
 
+void sig_chld(int);
+
 int
 main(int argc,char **argv)
 {
-    int    listenfd,connfd;
+    int listenfd,connfd;
     pid_t  childpid;
     socklen_t clilen;
     struct sockaddr_in cliaddr,servaddr;
@@ -18,12 +20,19 @@ main(int argc,char **argv)
     bind(listenfd,(SA*)&servaddr,sizeof(servaddr));
 
     listen(listenfd,LISTENQ);
+    
+    Signal(SIGCHLD,sig_chld);
 
     for (; ;) {
         clilen = sizeof(cliaddr);
-        connfd = accept(listenfd,(SA*)&clilen,&clilen);
+        if ((connfd = accept(listenfd,(SA*)&clilen,&clilen)) < 0) {
+            if (errno == EINTR) 
+                continue;
+            else 
+                printf("accept error \n");
+        }
 
-        if ((childpid = Fork() ) == 0) {
+        if ((childpid = fork() ) == 0) {
             close(listenfd);
             str_echo(connfd);
             exit(0);
