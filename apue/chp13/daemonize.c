@@ -28,7 +28,6 @@ daemonize(const char *cmd)
     sa.sa_handler = SIG_IGN;
     sigemptyset(&sa.sa_mask);
     sa.sa_flags = 0;
-
     if (sigaction(SIGHUP,&sa,NULL) < 0) {
         printf("%s:can't ignore SIGHUP\n");
     }
