@@ -1,21 +1,20 @@
 #include <stdio.h>
+#include <unistd.h>
 
 int
 main(int argc,char **argv)
 {
     int rv = 0;
-    /*
-    const char *old = "/home/gongde/study/Hello-World/testcase/C/File/aaa.c";
-    const char *new= "/home/gongde/study/Hello-World/testcase/C/File/bbbb.c";
-    */
-
-    rv = rename("aaa.c","ccccccc.c");
-
+    
+    //rv = rename("aaa.c","ccccccc.c");
+    //rv = rename("test/a/b/c/","testb/c/b/a/");
+    rv = access("aaa.c",0);
     printf("rv = %d \n",rv);
     if (rv) {
         printf("rename error \n");
         return -1;
     }
+    printf("file is exist \n");
 
     return 0;
 }
