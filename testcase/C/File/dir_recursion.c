@@ -75,5 +75,5 @@ dir_scan(char *path, char *file)
     } else {  
         printf("dirname:%s,filenames:%s\n",   dirname,   file);  
         count++;  
-    }  
+    }
 }
