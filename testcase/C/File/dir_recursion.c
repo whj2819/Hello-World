@@ -7,7 +7,7 @@
 #include   <sys/stat.h>  
 #include <unistd.h>
 
-#define PATHNAME 50
+#define PATHLEN  128
 
 void   dir_scan(char *path, char *file);  
 static int   count = 0;  
@@ -18,17 +18,18 @@ main(int argc, char **argv)
     struct   stat   s;  
 
     if (argc != 2) {  
-        printf("one   direction   requried\n");  
+        printf("one direction requried\n");  
         exit(1);  
     }  
-    if (lstat(argv[1],   &s) < 0) {  
-        printf("lstat   error\n");  
+    if (lstat(argv[1], &s) < 0) {  
+        printf("lstat error\n");  
         exit(2);  
     }  
     if (!S_ISDIR(s.st_mode)) {  
-        printf("%s   is   not   a   direction   name\n",   argv[1]);  
+        printf("%s is not a direction name\n", argv[1]);  
         exit(3);  
     }  
+
     dir_scan("",argv[1]);  
     printf("total:   %d   files\n",   count);  
 
@@ -41,13 +42,13 @@ dir_scan(char *path, char *file)
     struct   stat   s;  
     DIR           *dir;  
     struct   dirent   *dt;  
-    char   dirname[PATHNAME];  
+    char   dirname[PATHLEN];  
 
-    memset(dirname,0,PATHNAME*sizeof(char));  
+    memset(dirname,0,PATHLEN*sizeof(char));  
     strcpy(dirname,path);  
 
     if(lstat(file, &s) < 0) {  
-        printf("lstat   error\n");  
+        printf("lstat  error\n");  
     }  
 
     if(S_ISDIR(s.st_mode)){  
@@ -65,14 +66,14 @@ dir_scan(char *path, char *file)
             if (dt->d_name[0] == '.') {  
                 continue;  
             }  
-            dir_scan(dirname,   dt->d_name);  
+            dir_scan(dirname, dt->d_name);  
         }  
         if (chdir("..") < 0) {
             printf("chdir error");
             exit(6);
         }
     } else {  
-        printf("%s%s\n",   dirname,   file);  
+        printf("dirname:%s,filenames:%s\n",   dirname,   file);  
         count++;  
     }  
 }
