@@ -15,3 +15,6 @@ $cnt = next_counter();
 print "\$cnt:$cnt\n";
 $cnt = next_counter();
 print "\$cnt:$cnt\n";
+
+
+print "$counter \n";
