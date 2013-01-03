@@ -24,7 +24,7 @@ my $me = whoami();
 my $him = whowasi();
 
 sub whoami {
-    (caller(2))[3]
+    (caller(1))[3]
 }
 
 sub whowasi {

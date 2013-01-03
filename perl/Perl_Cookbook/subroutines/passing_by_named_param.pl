@@ -11,6 +11,7 @@ sub thefunc {
     print "INCREMENT:$args{INCREMENT} \n";
     print "FINSH:$args{FINSH} \n";
     print "START:$args{START} \n";
+    print "\@_:@_ \n";
     if ($args{INCREMENT} =~ /(\d+s$)/) {
         print "-------\n";
         print "$1 \n";
