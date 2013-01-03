@@ -19,12 +19,13 @@ static int k =0;
 int
 main(int argc,char **argv)
 {
-    u16 a[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18};
+    //u16 a[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18};
+    u16 a[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
     u16 data[15]  = {0};
     int i,j;
-    int row = 5,col = 3;
-    u16 tmp[5][3];
-    u16 b[5][3];
+    int row = 3,col = 5;
+    u16 tmp[3][5];
+    u16 b[3][5];
 
     u16 *p =a;
 
@@ -35,6 +36,7 @@ main(int argc,char **argv)
         }
         p += col;;
     }
+
     for (i = 0;i<row;i++) {
         for(j = 0;j<col;j++) {
             printf("%d  ",tmp[i][j]);
@@ -43,27 +45,28 @@ main(int argc,char **argv)
     }
     printf("\n");
     printf("\n");
-    printf("================\n");
 
     for (i = 0;i<col;i++) {
-        for(j = row-1;j>=0;j--) {
+        for(j = row-1;j>=0;j--) { 
             b[i][row-j-1]= tmp[j][i];
             printf("%d  ",b[i][row-j-1]);
         }
         printf("\n");
     }
-    printf("__________________-\n");
+    printf("__________________\n");
 
     for (i = 0;i<col;i++) {
         for (j = 0;j<row;j++) {
+           // printf("%d  ",b[i][j]);
             data[k] = b[i][j];
             k++;
-            printf("%d  ",b[i][j]);
         }
     }
-    printf("\n\n__++++____________-\n");
+    printf("___===================_________\n");
 
     for (i = 0;i< col*row;i++) {
+        if (i%row == 0) 
+            printf("\n");
         printf("%d  ",data[i]);
     }
 
