@@ -2,6 +2,7 @@
 
 use strict;
 use warnings;
+use Data::Dumper;
 
 my @AoH = (
     {
@@ -27,6 +28,9 @@ push @AoH,{
         daughter   => "pebbles",
 };
 
+print Dumper(@AoH),"\n\n";
+
+=pon
 for my $i (0 .. $#AoH) {
     print "$i is { ";
     for my $role (keys %{$AoH[$i]}) {
@@ -34,7 +38,6 @@ for my $i (0 .. $#AoH) {
     }
     print " }\n";
 }
-=pon
 for my $href (@AoH) {
     print "{ ";
     for my $role (keys %$href) {
