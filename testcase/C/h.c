@@ -11,8 +11,8 @@ int
 __convert(u16 *src,u16 row,u16 col,u16 *dest)
 {
 	u16 *p = src;
-	u16 tmp[ROW][COL];
-	u16 b[COL][ROW];
+	u16 tmp[row][col];
+	u16 b[col][row];
 	int i,j;
 	int k =0;
 	
@@ -27,11 +27,10 @@ __convert(u16 *src,u16 row,u16 col,u16 *dest)
 	     p += col;
 	 }
  
-	for (i = 0;i<col;i++) 
-		for(j = row-1;j>=0;j--) 
+	for (i =0; i<col; i++) 
+		for(j=row-1; j>=0; j--) 
 			b[i][row-j-1]= tmp[j][i];
 	 
-
 	for (i = 0;i<col;i++) {
 		for (j = 0;j<row;j++) {
 			dest[k] = b[i][j];
@@ -56,7 +55,7 @@ main(int argc,char **argv)
 	int i = 0;
 	int rv = 0;
 
-	rv = __convert(a,ROW,COL,b);
+	rv = __convert(a,3,5,b);
 	if(rv) {
 		printf("error \n");
 		//return rv;
@@ -64,13 +63,13 @@ main(int argc,char **argv)
 
 
 	printf("main func \n");
-
 	for (i=0; i<ROW*COL;i++) {
         if(i%COL == 0) 
 			printf("\n");
 		printf("%d ",a[i]);
 	}
 	printf("\n");
+	
 	for (i=0; i<ROW*COL;i++) {
         if(i%ROW == 0) 
 			printf("\n");
