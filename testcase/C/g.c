@@ -3,7 +3,7 @@
 
 typedef unsigned short u16;
 
-#define ROW 5
+#define ROW 2
 #define COL 3
 
 
@@ -20,12 +20,13 @@ int
 main(int argc,char **argv)
 {
     //u16 a[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18};
-    u16 a[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
-    u16 data[15]  = {0};
+    //u16 a[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+    u16 a[] = {1,2,3,4,5,6};
+    u16 data[18]  = {0};
     int i,j;
-    int row = 3,col = 5;
-    u16 tmp[3][5];
-    u16 b[3][5];
+    int row = ROW,col = COL;
+    u16 tmp[ROW][COL];
+    u16 b[COL][ROW];
 
     u16 *p =a;
 
@@ -43,7 +44,7 @@ main(int argc,char **argv)
         }
         printf("\n");
     }
-    printf("\n");
+    printf("tmp____end \n");
     printf("\n");
 
     for (i = 0;i<col;i++) {
@@ -53,16 +54,16 @@ main(int argc,char **argv)
         }
         printf("\n");
     }
-    printf("__________________\n");
+    printf("b end__________________\n");
 
     for (i = 0;i<col;i++) {
         for (j = 0;j<row;j++) {
-           // printf("%d  ",b[i][j]);
+            printf("%d  ",b[i][j]);
             data[k] = b[i][j];
             k++;
         }
     }
-    printf("___===================_________\n");
+    printf("data begin__________________\n");
 
     for (i = 0;i< col*row;i++) {
         if (i%row == 0) 
