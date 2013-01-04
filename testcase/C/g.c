@@ -3,8 +3,8 @@
 
 typedef unsigned short u16;
 
-#define ROW 3 
-#define COL 6
+#define ROW 9 
+#define COL 2 
 
 
 int __convert(u16 *src,u16 row,u16 col,u16 *dest)
