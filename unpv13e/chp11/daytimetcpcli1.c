@@ -35,12 +35,12 @@ main(int argc,char **argv)
 
 	for ( ; *pptr != NULL;pptr++) {
         sockfd = Socket(AF_INET,SOCK_STREAM,0);
+		
 		bzero(&servaddr,sizeof(servaddr));
-
-		servaddr->sin_family = AF_INET;
-		servaddr->port = sp->s_port;
+		servaddr.sin_family = AF_INET;
+		servaddr.sin_port = sp->s_port;
 		memcpy(&servaddr.sin_addr,*pptr,sizeof(struct in_addr));
-		printf("trying %s \n",Sock_ntop(SA *)&servaddr,sizeof(servaddr));
+		printf("trying %s \n",Sock_ntop((SA *)&servaddr,sizeof(servaddr)));
 
 		if (connect(sockfd,(SA*)&servaddr,sizeof(servaddr)) == 0) 
 			break;
@@ -51,7 +51,7 @@ main(int argc,char **argv)
 	if (*pptr == NULL) 
 		err_quit("unable to connect");
 
-	while ( (n = Read(socket,readline,MAXLINE)) > 0) {
+	while ( (n = Read(sockfd,readline,MAXLINE)) > 0) {
         recvline[n] = 0;
 		Fputs(recvline,stdout);
 	}
