@@ -50,7 +50,11 @@ main(int argc,char **argv)
 
 	if (*pptr == NULL) 
 		err_quit("unable to connect");
-	
 
-	
+	while ( (n = Read(socket,readline,MAXLINE)) > 0) {
+        recvline[n] = 0;
+		Fputs(recvline,stdout);
+	}
+
+	exit(0);
 }
