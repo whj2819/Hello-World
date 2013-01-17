@@ -3,8 +3,8 @@
  
 typedef unsigned short u16;
  
-#define ROW 3 
-#define COL 5 
+#define ROW 5 
+#define COL 3 
  
  
 int
@@ -32,11 +32,10 @@ __convert2(const u16 *src,u16 row,u16 col,u16 *dest)
 	if (src == NULL || dest == NULL)
 		return -1;
 
-    for(i =0; i<col; i++) {
-		for(j=0; j<row; j++) {
-	        *(dest+i*row+j) = *(src+i+col*(row-1-j) );
-            //dest++;
-		}
+    for (i=col-1;i>=0;i--) {
+        for(j=row-1;j>=0;j--) {
+            *dest++ = *(src+col*j+i);
+        }
     }
 
 	return 0;
@@ -57,14 +56,23 @@ main(int argc,char **argv)
 		//return rv;
 	}
 
+	printf("====aaaaaa========================== \n");
+	for (i=0; i<ROW*COL;i++) {
+		if (i%COL ==0)
+			printf("\n");
+		printf("%d ",a[i]);
+	}
+	printf("\n");
 
-	printf("main func \n");
+
+	printf("============================== \n");
 	for (i=0; i<ROW*COL;i++) {
 		if (i%ROW ==0)
 			printf("\n");
 		printf("%d ",b[i]);
 	}
 	printf("\n");
+	printf("============================== \n");
 
 	return 0;
 }
