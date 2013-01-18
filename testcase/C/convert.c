@@ -3,8 +3,8 @@
  
 typedef unsigned short u16;
  
-#define ROW 5 
-#define COL 3 
+#define ROW 3 
+#define COL 5 
  
  
 int
@@ -25,16 +25,32 @@ __convert(u16 *src,u16 row,u16 col,u16 *dest)
 }
 
 int
-__convert2(const u16 *src,u16 row,u16 col,u16 *dest)
+__convert2(const u16 *src,u16 h,u16 w,u16 *dest)
 {
 	int i,j;
 
 	if (src == NULL || dest == NULL)
 		return -1;
 
-    for (i=col-1;i>=0;i--) {
-        for(j=row-1;j>=0;j--) {
-            *dest++ = *(src+col*j+i);
+    for (i=w-1;i>=0;i--) {
+        for(j=h-1;j>=0;j--) {
+            *dest++ = *(src+w*j+i);
+        }
+    }
+
+	return 0;
+}
+int
+__convert3(const u16 *src,u16 h,u16 w,u16 *dest)
+{
+	int i,j;
+
+	if (src == NULL || dest == NULL)
+		return -1;
+
+    for (i=w-1;i>=0;i--) {
+        for(j=0;j<h;j++) {
+            *dest++ = *(src+w*j+i);
         }
     }
 
@@ -50,7 +66,7 @@ main(int argc,char **argv)
 	int i = 0;
 	int rv = 0;
 
-	rv = __convert2(a,ROW,COL,b);
+	rv = __convert3(a,ROW,COL,b);
 	if(rv) {
 		printf("error \n");
 		//return rv;
@@ -65,7 +81,7 @@ main(int argc,char **argv)
 	printf("\n");
 
 
-	printf("============================== \n");
+	printf("==bbbbbbb======================== \n");
 	for (i=0; i<ROW*COL;i++) {
 		if (i%ROW ==0)
 			printf("\n");
