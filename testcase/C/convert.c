@@ -68,14 +68,16 @@ __convert5(const u16 *src,u16 h,u16 w,u16 *dest)
 	if (src == NULL || dest == NULL)
 		return -1;
 
-    for (i=) {
-        for(j=0;) {
-            *dest++ = *(src+w*i+j);
+    for (i=w-1;i>=0;i--) {
+        for(j=0;j<h;j++) {
+            *dest++ = *(src+j*w+i);
         }
     }
 
 	return 0;
 }
+
+
 
 int
 main(int argc,char **argv)
@@ -87,7 +89,7 @@ main(int argc,char **argv)
 	int i = 0;
 	int rv = 0;
 
-	rv = __convert2(a,ROW,COL,b);
+	rv = __convert5(a,ROW,COL,b);
 	if(rv) {
 		printf("error \n");
 		//return rv;
