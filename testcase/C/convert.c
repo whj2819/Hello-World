@@ -40,6 +40,9 @@ __convert2(const u16 *src,u16 h,u16 w,u16 *dest)
 
 	return 0;
 }
+
+
+
 int
 __convert3(const u16 *src,u16 h,u16 w,u16 *dest)
 {
@@ -56,6 +59,24 @@ __convert3(const u16 *src,u16 h,u16 w,u16 *dest)
 
 	return 0;
 }
+
+int
+__convert5(const u16 *src,u16 h,u16 w,u16 *dest)
+{
+	int i,j;
+
+	if (src == NULL || dest == NULL)
+		return -1;
+
+    for (i=) {
+        for(j=0;) {
+            *dest++ = *(src+w*i+j);
+        }
+    }
+
+	return 0;
+}
+
 int
 main(int argc,char **argv)
 {
@@ -66,7 +87,7 @@ main(int argc,char **argv)
 	int i = 0;
 	int rv = 0;
 
-	rv = __convert3(a,ROW,COL,b);
+	rv = __convert2(a,ROW,COL,b);
 	if(rv) {
 		printf("error \n");
 		//return rv;
