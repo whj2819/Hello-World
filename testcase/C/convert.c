@@ -8,16 +8,17 @@ typedef unsigned short u16;
  
  
 int
-__convert(u16 *src,u16 row,u16 col,u16 *dest)
+__convert(u16 *src,u16 h,u16 w,u16 *dest)
 {
+    //row = h;col = w;
 	int i,j;
 
 	if (src == NULL || dest == NULL)
 		return -1;
 
-    for(j=0; j<col; j++) {
-		for(i=row-1; i>=0; i--) {
-	        *dest++ = *(src+i*col+j);
+    for(j=0; j<w; j++) {
+		for(i=h-1; i>=0; i--) {
+	        *dest++ = *(src+i*w+j);
 		}
     }
 
@@ -104,7 +105,7 @@ main(int argc,char **argv)
 	int i = 0;
 	int rv = 0;
 
-	rv = __convert6(a,ROW,COL,b);
+	rv = __convert3(a,ROW,COL,b);
 	if(rv) {
 		printf("error \n");
 		//return rv;
