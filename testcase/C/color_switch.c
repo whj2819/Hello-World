@@ -12,7 +12,7 @@ color_switch(unsigned char *dest,unsigned short *src,int len)
     int dest_len = len/4;
 
     for (i=0;i<dest_len;) {
-        *(dest+i%4) = (src[i]&0x03) | (src[i+1]<< 12)|(src[i+2] << 11)| src[i+3]; 
+        *(dest+i%4) = (src[i*4]&0x03) | (src[i+1]<< 12)|(src[i+2] << 11)| src[i+3]; 
         i += len;
     }
 
