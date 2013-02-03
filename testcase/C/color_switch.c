@@ -9,7 +9,7 @@
 unsigned short col_table[16] ={0xfff0,0xfff1,0xfff2,0xfff3,
     0xfff0,0xfff1,0xfff2,0xfff3,
     0xfff0,0xfff1,0xfff2,0xfff3,
-    0xfff0,0xfff1,0xfff2,0xfff3,
+    0xfff0,0xfff1,0xfff2,0xfff5,
 };
 
 void
@@ -18,8 +18,8 @@ change_to_2bit_color(unsigned char *dest,const unsigned short *src,int len)
     int i;
     int dest_len = len/4;
 
-    for (i=0;i<dest_len;i++) {
-        *(dest+i) = (src[i*4]&0x03) | ((src[i*4+1]&0x3)<< 2)\
+    for (i=0;i<dest_len; i++) {
+        dest[i] = (src[i*4]&0x03) | ((src[i*4+1]&0x3)<< 2)\
                       |((src[i*4+2]&0x3) << 4)| ((src[i*4+3]&0x3) << 6); 
     }
 
