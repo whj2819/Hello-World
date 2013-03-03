@@ -35,3 +35,18 @@ __string_toupper(char *s)
 
     return (s);
 }
+
+char *
+__string_clean(char *s,char fillc)
+{
+    char *p;
+
+    if (!s)
+        return (NULL);
+
+    for (p=s; *p; p++)
+        if(!isprint((int)*p) && !isspace((int)*p )
+            *p = fillc;
+
+    return (s);
+}
