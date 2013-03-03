@@ -1,6 +1,7 @@
 /* system header */
 #include <ctype.h>
 #include <string.h>
+#include <stdio.h>
 
 /* local header */
 //#include "cbase/defs.h"
@@ -79,4 +80,23 @@ __string_startswith(const char *s, char *prefix)
     len = strlen(prefix);
 
     return (! strncmp(s,prefix,len) );
+}
+
+
+c_bool_t
+__string_endswith(const char *s, char *stuffix)
+{
+    int offset,len;
+
+    if (!s || !stuffix)
+        return FALSE;
+
+    len = strlen(stuffix);
+    offset = strlen(s)-strlen(stuffix);
+
+    if (offset >= 0)
+        if (! strncmp(s+offset,stuffix,len) )
+            return TRUE;
+
+    return FALSE;
 }
