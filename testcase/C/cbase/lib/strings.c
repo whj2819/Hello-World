@@ -3,6 +3,7 @@
 #include <string.h>
 
 /* local header */
+#include "cbase/defs.h"
 #include "cbase/util.h"
 
 
@@ -49,4 +50,20 @@ __string_clean(char *s,char fillc)
             *p = fillc;
 
     return (s);
+}
+
+
+bool_t
+__string_is_numberic(char *s)
+{
+    char *p;
+
+    if (! *s)
+        return (FALSE);
+
+    for (p=s; *p; p++)
+        if(!isdigit((int)*p))
+            return FALSE;
+
+    return TRUE;
 }
