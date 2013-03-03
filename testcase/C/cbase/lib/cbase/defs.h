@@ -7,6 +7,6 @@
 
 
 
-typedef char bool_t;
+typedef char c_bool_t;
 
 #endif /* end of __DEFS_H */

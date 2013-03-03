@@ -3,7 +3,7 @@
 #include <string.h>
 
 /* local header */
-#include "cbase/defs.h"
+//#include "cbase/defs.h"
 #include "cbase/util.h"
 
 
@@ -53,7 +53,7 @@ __string_clean(char *s,char fillc)
 }
 
 
-bool_t
+c_bool_t
 __string_is_numberic(char *s)
 {
     char *p;
@@ -62,7 +62,7 @@ __string_is_numberic(char *s)
         return (FALSE);
 
     for (p=s; *p; p++)
-        if(!isdigit((int)*p))
+        if (! isdigit((int)*p))
             return FALSE;
 
     return TRUE;

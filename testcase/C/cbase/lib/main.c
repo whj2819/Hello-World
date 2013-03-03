@@ -7,7 +7,7 @@ int
 main(int argc, char *argv[])
 {
     //char s[] = "HELLO WORLD";
-    char s[] = "hello world";
+    char s[] = "12345";
 
 
 
