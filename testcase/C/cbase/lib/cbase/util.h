@@ -20,6 +20,7 @@ extern c_bool_t  __string_is_numberic(const char *s);
 extern c_bool_t  __string_startswith(const char *s, char *prefix);
 extern c_bool_t  __string_endswith(const char *s, char *stuffix);
 
+extern char * __string_trim(char *s);
 
 
 #ifdef __cplusplus

@@ -6,11 +6,11 @@ int
 main(int argc, char *argv[])
 {
     //char s[] = "HELLO WORLD";
-    char s[] = "Hello---";
+    char s[] = "    Hello world";
 
 
 
-     printf("%d \n",__string_endswith(s,"---------------"));
+     printf("%s \n",__string_trim(s));
 
      return 0;
 }

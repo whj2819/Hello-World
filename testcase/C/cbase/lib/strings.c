@@ -100,3 +100,29 @@ __string_endswith(const char *s, char *stuffix)
 
     return FALSE;
 }
+
+
+char *
+__string_trim(char *s)
+{
+    char *p,*q;
+    size_t llen,len;
+
+    if (!s)
+        return (NULL);
+
+    llen = len = strlen(s);
+
+    for (p=s; *p && isspace( (int)*p );p++,len--);
+
+    if (! len) {
+        *s = '\0';
+    } else {
+        for (q=s+llen-1; len>0  && isspace( (int)*q ); q--,len--);
+        
+        memmove( (void *)s, (void *)p, len );
+        *(s + len) = '\0';
+    }
+
+    return s;
+}
