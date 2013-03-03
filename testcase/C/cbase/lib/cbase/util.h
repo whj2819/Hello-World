@@ -7,6 +7,7 @@
 */
 
 extern char * __string_tolower(char *s);
+extern char * __string_toupper(char *s);
 
 
 
