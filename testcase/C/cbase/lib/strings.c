@@ -54,16 +54,29 @@ __string_clean(char *s,char fillc)
 
 
 c_bool_t
-__string_is_numberic(char *s)
+__string_is_numberic(const char *s)
 {
     char *p;
 
     if (! *s)
         return (FALSE);
 
-    for (p=s; *p; p++)
+    for (p=(char *)s; *p; p++)
         if (! isdigit((int)*p))
             return FALSE;
 
     return TRUE;
+}
+
+c_bool_t
+__string_startswith(const char *s, char *prefix)
+{
+    int len;
+
+    if (!s || !prefix)
+        return FALSE;
+
+    len = strlen(prefix);
+
+    return (! strncmp(s,prefix,len) );
 }

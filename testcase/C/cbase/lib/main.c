@@ -1,17 +1,16 @@
 #include <stdio.h>
 #include "cbase/util.h"
-//#include "cbase/defs.h"
 
 
 int
 main(int argc, char *argv[])
 {
     //char s[] = "HELLO WORLD";
-    char s[] = "12345";
+    char s[] = "---Hello";
 
 
 
-     printf("%d \n",__string_is_numberic(s));
+     printf("%d \n",__string_startswith(s,"---"));
 
      return 0;
 }
