@@ -45,7 +45,7 @@ __string_clean(char *s,char fillc)
         return (NULL);
 
     for (p=s; *p; p++)
-        if(!isprint((int)*p) && !isspace((int)*p )
+        if( !isprint((int)*p) && !isspace((int)*p) )
             *p = fillc;
 
     return (s);
