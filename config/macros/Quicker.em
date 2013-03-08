@@ -304,7 +304,7 @@ macro ExpandProcEN(szMyName,wordinfo,szLine,szLine1,nVer,ln,sel)
         InsBufLine(hbuf, ln, "@szLine1@typedef struct @szStructName@");
         InsBufLine(hbuf, ln + 1, "@szLine1@{");
         InsBufLine(hbuf, ln + 2, "@szLine@             ");
-        szStructName = cat(szStructName,"_STRU")
+        szStructName = cat(szStructName,"_T")
         InsBufLine(hbuf, ln + 3, "@szLine1@}@szStructName@;");
         SetBufIns (hbuf, ln + 2, strlen(szLine))
         return
@@ -316,7 +316,7 @@ macro ExpandProcEN(szMyName,wordinfo,szLine,szLine1,nVer,ln,sel)
         InsBufLine(hbuf, ln, "@szLine1@typedef enum @szStructName@");
         InsBufLine(hbuf, ln + 1, "@szLine1@{");
         InsBufLine(hbuf, ln + 2, "@szLine@             ");
-        szStructName = cat(szStructName,"_ENUM")
+        szStructName = cat(szStructName,"_E")
         InsBufLine(hbuf, ln + 3, "@szLine1@}@szStructName@;");
         SetBufIns (hbuf, ln + 2, strlen(szLine))
         return
@@ -682,7 +682,7 @@ macro ExpandProcCN(szMyName,wordinfo,szLine,szLine1,nVer,ln,sel)
         InsBufLine(hbuf, ln, "@szLine1@typedef struct @szStructName@");
         InsBufLine(hbuf, ln + 1, "@szLine1@{");
         InsBufLine(hbuf, ln + 2, "@szLine@      ");
-        szStructName = cat(szStructName,"_STRU")
+        szStructName = cat(szStructName,"_T")
         InsBufLine(hbuf, ln + 3, "@szLine1@}@szStructName@;");
         SetBufIns (hbuf, ln + 2, strlen(szLine))
         return
@@ -695,7 +695,7 @@ macro ExpandProcCN(szMyName,wordinfo,szLine,szLine1,nVer,ln,sel)
         InsBufLine(hbuf, ln, "@szLine1@typedef enum @szStructName@");
         InsBufLine(hbuf, ln + 1, "@szLine1@{");
         InsBufLine(hbuf, ln + 2, "@szLine@       ");
-        szStructName = cat(szStructName,"_ENUM")
+        szStructName = cat(szStructName,"_E")
         InsBufLine(hbuf, ln + 3, "@szLine1@}@szStructName@;");
         SetBufIns (hbuf, ln + 2, strlen(szLine))
         return
