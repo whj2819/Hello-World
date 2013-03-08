@@ -72,10 +72,12 @@ getop( char s[] )
 	    return c;
 
 	if ( isdigit(c) ) 
-	    while ( isdigit(s[++i] = c = getch() )) ;
+	    while ( isdigit(s[++i] = c = getch() ))
+			;
 
 	if ( c == '.' ) 
-	    while ( isdigit(s[++i] = c = getch() )) ;
+	    while ( isdigit(s[++i] = c = getch() ))
+			;
 
 	s[i] = '\0';
 
