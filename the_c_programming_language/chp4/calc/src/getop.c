@@ -3,12 +3,12 @@
   Copyright (C), 2001-2013, DCN Co., Ltd.
 
  ******************************************************************************
-  File Name     : calc.h
+  File Name     : getop.c
   Version       : Initial Draft
   Author        : huajie.wu
   Created       : 2013/3/8
   Last Modified :
-  Description   : nothing
+  Description   : getop
   Function List :
   History       :
   1.Date        : 2013/3/8
@@ -17,16 +17,9 @@
 
 ******************************************************************************/
 
-
-#ifndef __CALC_H__
-#define __CALC_H__
-
-
-#ifdef __cplusplus
-#if __cplusplus
-extern "C"{
-#endif
-#endif /* __cplusplus */
+#include <stdio.h>
+#include <ctype.h>
+#include "calc.h"
 
 
 /*----------------------------------------------*
@@ -40,15 +33,6 @@ extern "C"{
 /*----------------------------------------------*
  * internal routine prototypes                  *
  *----------------------------------------------*/
-
-void push(double f);
-double pop(void);
-int getop(char s[]);
-
-
-
-
- 
 
 /*----------------------------------------------*
  * project-wide global variables                *
@@ -66,19 +50,40 @@ int getop(char s[]);
  * macros                                       *
  *----------------------------------------------*/
 
- #define NUMBER '0'
-
 /*----------------------------------------------*
  * routines' implementations                    *
  *----------------------------------------------*/
 
 
-#ifdef __cplusplus
-#if __cplusplus
+/*Description  : 获取下一个运算符或数值操作数 */
+int
+getop( char s[] )
+{
+	int i = 0;
+	int c;
+
+
+	while ( (s[0] = c = getch) == ' ' || c = '\t' ) {
+	    ;
+	}
+	s[1] = '\0';
+
+	if ( ! isdigit(c) || c != '.' )
+	    return c;
+
+	if ( isdigit(c) ) 
+	    while ( isdigit(s[++i] = c = getch() )) ;
+
+	if ( c == '.' ) 
+	    while ( isdigit(s[++i] = c = getch() )) ;
+
+	s[i] = '\0';
+
+	if ( c != EOF ) {
+	    ungetch();
+	}
+
+	return NUMBER;
+	
 }
-#endif
-#endif /* __cplusplus */
-
-
-#endif /* __CALC_H__ */
 

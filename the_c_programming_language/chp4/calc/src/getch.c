@@ -3,12 +3,12 @@
   Copyright (C), 2001-2013, DCN Co., Ltd.
 
  ******************************************************************************
-  File Name     : calc.h
+  File Name     : getch.c
   Version       : Initial Draft
   Author        : huajie.wu
   Created       : 2013/3/8
   Last Modified :
-  Description   : nothing
+  Description   : getch
   Function List :
   History       :
   1.Date        : 2013/3/8
@@ -17,17 +17,7 @@
 
 ******************************************************************************/
 
-
-#ifndef __CALC_H__
-#define __CALC_H__
-
-
-#ifdef __cplusplus
-#if __cplusplus
-extern "C"{
-#endif
-#endif /* __cplusplus */
-
+#include <stdio.h>
 
 /*----------------------------------------------*
  * external variables                           *
@@ -40,15 +30,6 @@ extern "C"{
 /*----------------------------------------------*
  * internal routine prototypes                  *
  *----------------------------------------------*/
-
-void push(double f);
-double pop(void);
-int getop(char s[]);
-
-
-
-
- 
 
 /*----------------------------------------------*
  * project-wide global variables                *
@@ -66,19 +47,7 @@ int getop(char s[]);
  * macros                                       *
  *----------------------------------------------*/
 
- #define NUMBER '0'
-
 /*----------------------------------------------*
  * routines' implementations                    *
  *----------------------------------------------*/
-
-
-#ifdef __cplusplus
-#if __cplusplus
-}
-#endif
-#endif /* __cplusplus */
-
-
-#endif /* __CALC_H__ */
 

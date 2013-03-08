@@ -65,3 +65,15 @@
 
  }
 
+ double
+ pop(void)
+ {
+ 	if (sp>0) {
+		return val[--sp];
+	}
+	else {
+		printf();
+		return 0.0;
+	}
+ }
+
