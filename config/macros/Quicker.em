@@ -156,7 +156,7 @@ macro ExpandProcEN(szMyName,wordinfo,szLine,szLine1,nVer,ln,sel)
     else if (szCmd == "while" )
     {
         SetBufSelText(hbuf, " ( # ) {")
-        InsBufLine(hbuf, ln + 1, "@szLine@" # "#");
+        InsBufLine(hbuf, ln + 1, "@szLine@" # ";");
         InsBufLine(hbuf, ln + 2, "@szLine1@" # "}");
     }
     else if( szCmd == "else" )
@@ -194,19 +194,19 @@ macro ExpandProcEN(szMyName,wordinfo,szLine,szLine1,nVer,ln,sel)
     else if (szCmd == "if")
     {
         SetBufSelText(hbuf, " ( # ) {")
-        InsBufLine(hbuf, ln + 1, "@szLine@" # "#");
+        InsBufLine(hbuf, ln + 1, "@szLine@" # ";");
         InsBufLine(hbuf, ln + 2, "@szLine1@" # "}");
     }
     else if (szCmd == "ef")
     {
         PutBufLine(hbuf, ln, szLine1 # "else if ( # ) {")
-        InsBufLine(hbuf, ln + 1, "@szLine@" # "#");
+        InsBufLine(hbuf, ln + 1, "@szLine@" # ";");
         InsBufLine(hbuf, ln + 2, "@szLine1@" # "}");
     }
     else if (szCmd == "ife")
     {
         PutBufLine(hbuf, ln, szLine1 # "if ( # ) {")
-        InsBufLine(hbuf, ln + 1, "@szLine@" # "#");
+        InsBufLine(hbuf, ln + 1, "@szLine@" # ";");
         InsBufLine(hbuf, ln + 2, "@szLine1@" # "} else {");
         //InsBufLine(hbuf, ln + 3, "@szLine1@" # "else {");
         InsBufLine(hbuf, ln + 3, "@szLine@" # ";");
@@ -215,7 +215,7 @@ macro ExpandProcEN(szMyName,wordinfo,szLine,szLine1,nVer,ln,sel)
     else if (szCmd == "ifs")
     {
         PutBufLine(hbuf, ln, szLine1 # "if ( # ) {")
-        InsBufLine(hbuf, ln + 1, "@szLine@" # "#");
+        InsBufLine(hbuf, ln + 1, "@szLine@" # ";");
         InsBufLine(hbuf, ln + 2, "@szLine1@" # "} else if ( # ) {");
         InsBufLine(hbuf, ln + 3, "@szLine@" # ";");
         InsBufLine(hbuf, ln + 4, "@szLine1@" # "} else {");
@@ -225,7 +225,7 @@ macro ExpandProcEN(szMyName,wordinfo,szLine,szLine1,nVer,ln,sel)
     else if (szCmd == "for")
     {
         SetBufSelText(hbuf, " (#; #; #) {")
-        InsBufLine(hbuf, ln + 1, "@szLine@" # "#")
+        InsBufLine(hbuf, ln + 1, "@szLine@" # ";")
         InsBufLine(hbuf, ln + 2, "@szLine1@" # "}")
         SetWndSel(hwnd, sel)
         SearchForward()
@@ -233,12 +233,12 @@ macro ExpandProcEN(szMyName,wordinfo,szLine,szLine1,nVer,ln,sel)
         newsel = sel
         newsel.ichLim = GetBufLineLength (hbuf, ln)
         SetWndSel(hwnd, newsel)
-        SetBufSelText(hbuf, " ( @szVar@=#; @szVar@ #; @szVar@++) {")
+        SetBufSelText(hbuf, " (@szVar@=#; @szVar@ #; @szVar@++) {")
     }
     else if (szCmd == "fo")
     {
         SetBufSelText(hbuf, "r (ulI=0; ulI<#; ulI++) {")
-        InsBufLine(hbuf, ln + 1, "@szLine@" # "#")
+        InsBufLine(hbuf, ln + 1, "@szLine@" # ";")
         InsBufLine(hbuf, ln + 2, "@szLine1@" # "}")
         symname =GetCurSymbol ()
         symbol = GetSymbolLocation(symname)
@@ -272,21 +272,21 @@ macro ExpandProcEN(szMyName,wordinfo,szLine,szLine1,nVer,ln,sel)
     else if (szCmd == "do")
     {
 	    SetBufSelText(hbuf,"{");
-        InsBufLine(hbuf, ln + 1, "@szLine@" # "#");
+        InsBufLine(hbuf, ln + 1, "@szLine@" # ";");
         InsBufLine(hbuf, ln + 2, "@szLine1@" # "} while ( # );")
     }
     else if (szCmd == "case" )
     {
         SetBufSelText(hbuf, " # :")
-        InsBufLine(hbuf, ln + 1, "@szLine@" # "#")
+        InsBufLine(hbuf, ln + 1, "@szLine@" # ";")
         InsBufLine(hbuf, ln + 2, "@szLine@" # "break;")
     }
     else if (szCmd == "struct" || szCmd == "st")
     {
         DelBufLine(hbuf, ln)
         szStructName = toupper(Ask("Please input struct name"))
-        InsBufLine(hbuf, ln, "@szLine1@typedef struct @szStructName@");
-        InsBufLine(hbuf, ln + 1, "@szLine1@{");
+        InsBufLine(hbuf, ln, "@szLine1@typedef struct @szStructName@ {");
+        InsBufLine(hbuf, ln + 1, "@szLine1@");
         InsBufLine(hbuf, ln + 2, "@szLine@             ");
         szStructName = cat(szStructName,"_T")
         InsBufLine(hbuf, ln + 3, "@szLine1@}@szStructName@;");
@@ -297,8 +297,8 @@ macro ExpandProcEN(szMyName,wordinfo,szLine,szLine1,nVer,ln,sel)
     {
         DelBufLine(hbuf, ln)
         szStructName = toupper(Ask("Please input enum name"))
-        InsBufLine(hbuf, ln, "@szLine1@typedef enum @szStructName@");
-        InsBufLine(hbuf, ln + 1, "@szLine1@{");
+        InsBufLine(hbuf, ln, "@szLine1@typedef enum @szStructName@ {");
+        InsBufLine(hbuf, ln + 1, "@szLine1@");
         InsBufLine(hbuf, ln + 2, "@szLine@             ");
         szStructName = cat(szStructName,"_E")
         InsBufLine(hbuf, ln + 3, "@szLine1@}@szStructName@;");
@@ -3729,7 +3729,7 @@ macro InsertMultiCaseProc(hbuf,szLeft,nSwitch)
             {
                 ln = ln + 3
                 InsBufLine(hbuf, ln - 1, "@szLeft@" # "case @szLine@:")
-                InsBufLine(hbuf, ln    , "@szLeft@" # "#")
+                InsBufLine(hbuf, ln    , "@szLeft@" # ";")
                 InsBufLine(hbuf, ln + 1, "@szLeft@" # "    " # "break;")
               }
               i = i + 1
@@ -3742,13 +3742,13 @@ macro InsertMultiCaseProc(hbuf,szLeft,nSwitch)
         {
             ln = ln + 3
             InsBufLine(hbuf, ln - 1, "@szLeft@" # "case # :")
-            InsBufLine(hbuf, ln    , "@szLeft@" # "#")
+            InsBufLine(hbuf, ln    , "@szLeft@" # ";")
             InsBufLine(hbuf, ln + 1, "@szLeft@" # "    "# "break;")
             nIdx = nIdx + 1
         }
       }
     InsBufLine(hbuf, ln + 2, "@szLeft@" # "default:")
-    InsBufLine(hbuf, ln + 3, "@szLeft@" # "#")
+    InsBufLine(hbuf, ln + 3, "@szLeft@" # ";")
     InsBufLine(hbuf, ln + 4, "@szLeft@" # "    "# "break;")
     InsBufLine(hbuf, ln + 5, "@szLeft@" # "}")
     SetWndSel(hwnd, sel)
