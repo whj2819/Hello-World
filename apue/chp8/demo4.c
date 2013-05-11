@@ -1,7 +1,6 @@
 #include "apue.h"
 #include <sys/wait.h>
 
-/*
 void pr_exit(int status)
 {
     if ( WIFEXITED(status) ) {
@@ -11,13 +10,12 @@ void pr_exit(int status)
 #ifdef WCOREDUMP
                 WCOREDUMP(status) ? "(core file generated)" : "" );
 #else
-        "");
+        " (12345678)");
 #endif
     } else if ( WIFSTOPPED(status) ) {
         printf("child stopped,signal number = %d \n", WSTOPSIG(status) );
     }
 }
-*/
 
 
 int main(void)
