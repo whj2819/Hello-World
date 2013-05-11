@@ -5,7 +5,7 @@
 int
 main(int argc, char *argv[])
 {
-    pid_t pid;
+    pid_t pid=0;
 
     if ((pid == fork()) < 0) {
         err_sys("fork error");
