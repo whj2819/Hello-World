@@ -29,5 +29,11 @@ int main(void)
         }
     }
 
+#if 0
+    if (waitpid(pid,NULL,0) < 0) {
+        err_sys("wait error.");
+    }
+#endif
+
     exit (0);
 }
