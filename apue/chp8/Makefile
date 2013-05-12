@@ -1,4 +1,4 @@
-PROGS = tmp demo1 demo2 demo5 demo8 echoall
+PROGS = tmp demo1 demo2 demo5 demo8 echoall identify
 CC = gcc
 CFLAG = -Wall -g
 CLEANFILES= *.out *.o
@@ -17,6 +17,8 @@ echoall: echoall.o
 	${CC} ${CFLAG} -o $@ echoall.c ${LIB}
 tmp: tmp.o
 	${CC} ${CFLAG} -o $@ tmp.c ${LIB}
+identify: identify.o
+	${CC} ${CFLAG} -o $@ identify.c ${LIB}
 
 
 
