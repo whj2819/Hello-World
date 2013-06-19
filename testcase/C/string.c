@@ -2,23 +2,25 @@
 #include <string.h>
 #include <stdlib.h>
 
+char *
+format(char *buffer,size_t size,
+        const char *name,size_t quantity,size_t weight)
+{
+
+    snprintf(buffer,size,"Item:%s Quantity:%u Weight:%u",
+            name,quantity,weight);
+
+    return buffer;
+}
 
 
 int
 main(int argc, char *argv[])
 {
-    char *error = "ERROR:";
-    char *error_message = "not enough memory";
+    char buffer[128] = {0};
 
-    char *buffer = (char *)malloc(strlen(error) + strlen(error_message) +1);
-
-    strcpy(buffer,error);
-    strcat(buffer,error_message);
-
-    printf("[%s] \n",buffer);
-    printf("[%s] \n",error);
-    printf("[%s] \n",error_message);
-
+    printf("%s \n",format(buffer,sizeof(buffer), "Axle",25,45));
     return 0;
 
 }
+
