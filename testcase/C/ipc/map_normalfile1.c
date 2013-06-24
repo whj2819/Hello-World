@@ -32,8 +32,8 @@ main(int argc, char *argv[])
 
     for(i=0; i<10; i++) {
         temp += 1;
-        memcpy( (*(p_map+i) ).name,&temp,2);
-        ( *(p_map+i) ).age = 20 + i;
+        memcpy( (p_map+i)->name,&temp,2);
+        (p_map+i)->age = 20 + i;
     }
     printf(" initialize over \n");
     sleep(10);

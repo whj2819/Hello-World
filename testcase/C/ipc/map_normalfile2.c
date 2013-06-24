@@ -23,7 +23,7 @@ main(int argc, char *argv[])
                         );
 
     for(i=0; i<10; i++) 
-        printf ("name: %s age %d;\n",(*(p_map+i)).name,(*(p_map+i)).age );
+        printf ("name: %s age %d;\n",(*(p_map+i)).name,(p_map+i)->age );
 
 
     munmap( p_map,sizeof(people) * 10);

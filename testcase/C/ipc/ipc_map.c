@@ -1,5 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <sys/mman.h>
+#include <unistd.h>
 //#include <sys/types.h>
 //#include <sys/stat.h>
 
@@ -27,13 +30,25 @@ main(int argc, char *argv[])
         sleep(2);
         for (i=0; i<5; i++)
             printf("child read: the %d people's age is %d\n",
-                    i+1,(*(p_map+i)).age);
-        (*p_map).age = 100;
+                    i+1,(p_map+i)->age);
+        p_map->age = 100;
         munmap(p_map,sizeof(people) * 10);
-        exit();
+        exit(7);
     }
+
+    temp = 'a';
+    for (i=0; i<5; i++) {
+        temp += 1;
+        memcpy( (p_map+i)->name,&temp,2);
+         (p_map+i)->age = 20 + i;
+    }
+
+    sleep(5);
+    printf("parent read: the first people's age is %d\n",p_map->age);
+    printf("umap \n");
+    munmap( p_map,sizeof(people) * 10);
+    printf("umap  ok\n");
 
     return 0;
 }
-
 
