@@ -27,7 +27,7 @@ main(int argc, char *argv[])
                            PROT_READ|PROT_WRITE,
                            MAP_SHARED,fd,0
                         );
-    close(fd);
+//    close(fd);
     temp = 'a';
 
     for(i=0; i<10; i++) {
