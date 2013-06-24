@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <sys/mman.h>
 
 
@@ -11,7 +15,6 @@ main(int argc, char *argv[])
 {
     int fd,i;
     people *p_map;
-    char temp;
 
     fd = open(argv[1],O_CREAT|O_RDWR,00777);
     p_map = (people *)mmap( NULL,sizeof(people)*10,
@@ -20,10 +23,11 @@ main(int argc, char *argv[])
                         );
 
     for(i=0; i<10; i++) 
-        printf ("name: %s age %d;\n",((*p_map+i)).name,((*p_map+i)).age );
+        printf ("name: %s age %d;\n",(*(p_map+i)).name,(*(p_map+i)).age );
 
 
     munmap( p_map,sizeof(people) * 10);
 
     return 0;
+}
 
