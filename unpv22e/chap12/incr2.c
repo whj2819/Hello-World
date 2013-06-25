@@ -34,8 +34,19 @@ main(int argc, char *argv[])
 
     setbuf(stdout,NULL);
 
-    if (fork() == 0) {
+    if (Fork() == 0) {
+        for (i=0; i<nloop; i++) {
+            Sem_wait(mutex);
+            printf("child: %d \n",(*ptr)++);
+            Sem_post(mutex);
+        }
+    }
 
+
+    for (i=0; i<nloop; i++) {
+        Sem_wait(mutex);
+        printf("parent: %d \n",(*ptr)++);
+        Sem_post(mutex);
     }
 
     return 0;
