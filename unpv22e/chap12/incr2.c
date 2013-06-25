@@ -1,6 +1,6 @@
-#include <stdio.h>
+#include "unpipc.h"
 
-#define SEM_NAME "/tmp/mysem"
+#define SEM_NAME "mysem"
 
 
 int
@@ -11,14 +11,14 @@ main(int argc, char *argv[])
     sem_t *mutex;
 
     if (argc != 3) {
-        printf("usage: incr2 <pathname> <#loops> \n");
+        err_quit("usage: incr2 <pathname> <#loops> \n");
         return -1;
     }
     nloop = atoi(argv[2]);
 
-    fd = open(argv[1],O_RDRW | O_CREAT,00666);
-    write(fd, &zeor,sizeof(int));
-    ptr = (int *)mmap(
+    fd = Open(argv[1],O_RDWR | O_CREAT,00666);
+    Write(fd, &zero,sizeof(int));
+    ptr = (int *)Mmap(
                       NULL,
                       sizeof(int),
                       PROT_READ | PROT_WRITE,
@@ -29,17 +29,14 @@ main(int argc, char *argv[])
 
     close(fd);
 
-    mutex =sem_open(SEM_NAME,O_CREAT | O_EXCL,00666,1);
-    sem_link(SEM_NAME);
+    mutex =Sem_open(SEM_NAME,O_CREAT | O_EXCL,00666,1);
+    Sem_unlink(SEM_NAME);
 
     setbuf(stdout,NULL);
 
     if (fork() == 0) {
 
     }
-
-
-    
 
     return 0;
 }
