@@ -24,6 +24,7 @@ main(int argc, char *argv[])
         err_quit("usage:shmcreate [-e] <name> <length>");
 
     length = atoi(argv[optind + 1]);
+    printf("argv[optind]:%s \n",argv[optind]);
 
     fd = Shm_open(argv[optind], flags, FILE_MODE);
     Ftruncate(fd, length);
