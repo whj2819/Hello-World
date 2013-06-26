@@ -11,7 +11,8 @@ main(int argc, char *argv[])
     if (argc != 2)
         err_quit("usage: test3 <name>");
 
-    Shm_unlink(Px_ipc_name(argv[1]) );
+    printf("[%s] \n",argv[1]);
+    //Shm_unlink(Px_ipc_name(argv[1]) );
     fd1 = Shm_open(Px_ipc_name(argv[1]),O_RDWR | O_CREAT | O_EXCL,FILE_MODE);
     Ftruncate(fd1,sizeof(int));
     fd2 = Open("/etc/motd",O_RDONLY);
@@ -26,6 +27,8 @@ main(int argc, char *argv[])
         exit(0);
     }
 
+
+    printf("[%d] \n",stat.st_size);
 
     ptr1 = Mmap(NULL,sizeof(int),PROT_READ | PROT_WRITE,MAP_SHARED,fd1,0);
     ptr2 = Mmap(NULL,stat.st_size,PROT_READ,MAP_SHARED,fd2,0);
