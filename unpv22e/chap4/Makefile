@@ -1,6 +1,6 @@
 include ../Make.defines
 
-PROGS = mainpipe mainfifo server_main client_main
+PROGS = mainpipe mainfifo server_main client_main mainserver mainclient
 
 all:	${PROGS}
 
@@ -15,5 +15,11 @@ server_main:	server_main.o server.o
 
 client_main:	client_main.o client.o
 		${CC} ${CFLAGS} -o $@ client_main.o client.o ${LIBS}
+
+mainserver:	mainserver.o
+		${CC} ${CFLAGS} -o $@ mainserver.o ${LIBS}
+
+mainclient:	mainclient.o
+		${CC} ${CFLAGS} -o $@ mainclient.o ${LIBS}
 clean:
 		rm -f ${PROGS} ${CLEANFILES}
