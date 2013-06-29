@@ -12,7 +12,7 @@ main(int argc, char *argv[])
         err_quit("usage: test3 <name>");
 
     printf("[%s] \n",argv[1]);
-    //Shm_unlink(Px_ipc_name(argv[1]) );
+    Shm_unlink(Px_ipc_name(argv[1]) );
     fd1 = Shm_open(Px_ipc_name(argv[1]),O_RDWR | O_CREAT | O_EXCL,FILE_MODE);
     Ftruncate(fd1,sizeof(int));
     fd2 = Open("/etc/motd",O_RDONLY);

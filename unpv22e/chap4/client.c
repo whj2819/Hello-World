@@ -4,7 +4,7 @@ void
 client(int readfd, int writefd)
 {
     size_t len;
-    ssizet_ n;
+    ssize_t n;
     char buff[MAXLINE];
 
     Fgets(buff,MAXLINE,stdin);
@@ -15,6 +15,6 @@ client(int readfd, int writefd)
     Write(writefd,buff,len);
 
     while ( (n = Read(readfd,buff,MAXLINE)) > 0)
-        Write(writefd,buff,n);
+        Write(STDOUT_FILENO,buff,n);
 
 }
