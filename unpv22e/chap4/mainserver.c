@@ -10,8 +10,6 @@ main(int argc, char *argv[])
     char *ptr,buff[MAXLINE + 1],fifoname[MAXLINE];
     pid_t pid;
     ssize_t n;
-    int cnt = 0;
-
 
     if (( mkfifo(SERV_FIFO, FILE_MODE) < 0) && (errno != EEXIST))
         err_sys("can't create %s",SERV_FIFO);
@@ -34,7 +32,6 @@ main(int argc, char *argv[])
         pid = atol(buff);
 
         snprintf(fifoname,sizeof(fifoname),"/tmp/fifo.%ld",(long)pid);
-
         if ( (writefifo = open(fifoname,O_WRONLY,0)) < 0) {
             err_msg("can't open:%s",fifoname);
             continue;
@@ -43,8 +40,6 @@ main(int argc, char *argv[])
         if (( fd = open(ptr,O_RDONLY)) < 0) {
             snprintf(buff + n, sizeof(buff) - n,":can't open %s\n",
                     strerror(errno) );
-            printf("n = %d,sizeof(buf) = %d \n",n,sizeof(buff));
-
             n = strlen(ptr);
             Write(writefifo,ptr,n); 
             Close(writefifo);
@@ -55,10 +50,8 @@ main(int argc, char *argv[])
             Close(fd);
             Close(writefifo);
         }
-        cnt++;
-    }// end of while
 
-    printf("cnt[%d] \n",cnt);
+    }// end of while
 
     exit(0);
 }
