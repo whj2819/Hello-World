@@ -9,7 +9,6 @@ main(int argc, char *argv[])
 {
 
     int readfd,writefd;
-    pid_t childpid;
 
 
     if ((mkfifo(FIFO1, FILE_MODE) < 0) && (errno != EEXIST) )
