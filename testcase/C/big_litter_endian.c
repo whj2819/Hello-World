@@ -4,7 +4,6 @@ int
 main(int argc, char *argv[])
 {
     int c = 1;
-    int val;
 
     if (( *(char *)&c) == 1)
         printf("litter endian \n");
