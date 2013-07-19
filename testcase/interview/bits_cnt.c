@@ -2,8 +2,6 @@
  * 计算 变量包含多少位1
   *
  */
-
-
 #include <stdio.h>
 
 int
