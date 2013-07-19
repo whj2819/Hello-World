@@ -76,7 +76,7 @@ main(void)
     int i, j, k;
     int cnt = 0;
 
-    for (i=0; i<5; i++) {
+    for (i=0; i<5; i++) 
         for (j=0; j<5; j++) {
             for (k=0; k<8; k++) {
                 if ( i + pos[k][0] < 0 || i + pos[k][0] > 4
@@ -85,19 +85,9 @@ main(void)
                  else
                     tmp[cnt++] = a[ i + pos[k][0] ][ j + pos[k][1] ];
             }       
-            //排序,求中间值,赋值给数组b
             b[i][j] = get_mid_value(tmp, cnt);
             cnt = 0;
         }
-    }
 
-#if 1 
-    for (i=0; i<5; i++) {
-        for (j=0; j<5; j++) {
-            printf("%d   ", b[i][j]);
-        }
-        printf("\n");
-    }
-#endif
-    return 0;
+   return 0;
 }
