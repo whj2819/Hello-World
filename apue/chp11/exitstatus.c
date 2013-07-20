@@ -1,7 +1,7 @@
 #include "apue.h"
 #include <pthread.h>
 
-void
+void *
 thr_fn1(void *arg)
 {
     printf("thread 1 returnning \n");
@@ -9,7 +9,7 @@ thr_fn1(void *arg)
     return ((void *)1);
 }
 
-void
+void *
 thr_fn2(void *arg)
 {
     printf("thread 2 exiting \n");
