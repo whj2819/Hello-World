@@ -16,12 +16,9 @@ thr_fn1(void *arg)
     pthread_cleanup_push(cleanup, "thread 1 second handler");
     printf("thread 1 push complete \n");
 
-    if (arg) {
-        printf("1111111before arg \n");
+    if (arg)
         return ((void *)1);
-    }
 
-    printf("1111111111after arg \n");
     pthread_cleanup_pop(0);
     pthread_cleanup_pop(0);
 
@@ -36,12 +33,8 @@ thr_fn2(void *arg)
     pthread_cleanup_push(cleanup, "thread 2 second handler");
     printf("thread 2 push complete \n");
 
-    if (arg) {
-        printf("2222before arg \n");
+    if (arg)
        pthread_exit( (void *)2); 
-    }
-
-    printf("2222222after arg \n");
 
     pthread_cleanup_pop(0);
     pthread_cleanup_pop(0);
