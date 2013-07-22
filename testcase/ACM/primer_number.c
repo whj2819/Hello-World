@@ -15,7 +15,7 @@ main(void)
         if (n == 0)
             break;
 
-        for (i=2; i<sqrt(n); i++)
+        for (i=2; i<=sqrt(n); i++)
             if (n%i == 0)
                 break;
 
