@@ -3,16 +3,14 @@
 
 #define MAX_SIZE (400)
 
-static int answer[MAX_SIZE + 1] = {0};
-
+static char answer[MAX_SIZE + 1] = {0};
 static void
-print_num(int *s, int len)
+print_num(char *s, int len)
 {
     int i;
 
     for (i=len - 1; i>=0; i--)
         printf("%d", s[i]);
-
     printf("\n");
 }
 
@@ -22,8 +20,8 @@ reverse(char *s, int len)
     int i, tmp;
 
     for (i=0; i<len/2; i++) {
-        tmp = s[len - i -1];
-        s[len - i -1] = s[i];
+        tmp = s[len-i-1];
+        s[len-i -1] = s[i];
         s[i] = tmp; 
     }
 }
@@ -53,10 +51,8 @@ big_add(char *a, char *b)
         answer[i] = tmp % 10;
     }
 
-    if (1 == carry) { /* 最高位有进位 */
+    if (1 == carry) /* 最高位有进位 */
         answer[len] = 1;
-        print_num(answer, len + 1);
-    }
 
     print_num(answer, len);
 }
