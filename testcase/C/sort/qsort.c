@@ -19,7 +19,15 @@ qsort1(int l, int u)
 
     if (l >= u)
         return;
-
+#if 1
+    m = u + 1;
+    for(i=u; i>=l; i--)
+        if (x[i] >= x[l])
+            swap(--m, i);
+    
+    qsort1(l, m-1);
+    qsort1(m+1, u);
+#else
     m = l;
     for (i=l+1; i<=u; i++)
         if (x[i] < x[l])
@@ -28,6 +36,7 @@ qsort1(int l, int u)
     swap(l, m);
     qsort1(l, m-1);
     qsort1(m+1, u);
+#endif
 }
 
 
@@ -44,6 +53,5 @@ main(void)
     for (i=0; i<8; i++)
         printf("%d ", x[i]);
     printf("\n");
-
     return 0;
 }
