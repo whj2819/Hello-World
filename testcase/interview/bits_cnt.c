@@ -11,7 +11,6 @@ main(void)
     int x = 7;
 
     while (x) {
-
         cnt ++;
         x = x & (x-1);
     }
