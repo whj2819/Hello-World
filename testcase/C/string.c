@@ -14,6 +14,37 @@ format(char *buffer,size_t size,
 }
 
 
+/*
+ *input:"hello world abc"
+ *
+ *output: "cba dlrow olleh"
+ */
+void
+reverse(char *s)
+{
+    int i, tmp;
+    int len = strlen(s);
+
+    for(i=0; i<len/2; i++) {
+        tmp = s[len - i -1];
+        s[len - i -1]  = s[i];
+        s[i] = tmp;
+    }
+}
+
+int
+main(void)
+{
+    char s[] = "hello world abc";
+
+    reverse(s);
+    printf("%s \n", s);
+    return 0;
+}
+
+
+
+#if 0
 int
 main(int argc, char *argv[])
 {
@@ -23,4 +54,4 @@ main(int argc, char *argv[])
     return 0;
 
 }
-
+#endif
