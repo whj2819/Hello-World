@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 #include <stdlib.h>
 
 char *
@@ -32,17 +33,52 @@ reverse(char *s)
     }
 }
 
+
+
+
+
+static void
+reverse_word(char *p, char *q)
+{
+    char t;
+
+    while (p < q) {
+        t = *p;
+        *p++ = *q;
+        *q-- = t;
+    }
+}
+
+void
+fun(char *s)
+{
+    char *p, *q;
+
+    p = s; q=s;
+    while(*q != '\0') {
+        if (isspace(*q)) {
+            reverse_word(p, q-1);
+            q++;
+            p = q;
+        } else {
+            q++;
+        }
+    }
+    reverse_word(p, q-1);
+}
+
 int
 main(void)
 {
-    char s[] = "hello world abc";
+    //char s[] = "ast TVs ULLy"; // =====>"tsa sVT yLLU"
+    //char s[] = "This is a sentence"; 
+    char s[] = "ast FVs ULLY"; 
 
-    reverse(s);
+    fun(s);
+
     printf("%s \n", s);
     return 0;
 }
-
-
 
 #if 0
 int
