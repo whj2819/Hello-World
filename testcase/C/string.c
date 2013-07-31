@@ -34,9 +34,6 @@ reverse(char *s)
 }
 
 
-
-
-
 static void
 reverse_word(char *p, char *q)
 {
@@ -54,7 +51,7 @@ fun(char *s)
 {
     char *p, *q;
 
-    p = s; q=s;
+    p= s; q=s;
     while(*q != '\0') {
         if (isspace(*q)) {
             reverse_word(p, q-1);
@@ -65,14 +62,13 @@ fun(char *s)
         }
     }
     reverse_word(p, q-1);
+    //reverse_word(s, q-1);// ====> ULLY FVs ast
 }
 
 int
 main(void)
 {
-    //char s[] = "ast TVs ULLy"; // =====>"tsa sVT yLLU"
-    //char s[] = "This is a sentence"; 
-    char s[] = "ast FVs ULLY"; 
+    char s[] = "ast FVs ULLY"; // =====>"tsa sVF YLLU"
 
     fun(s);
 
