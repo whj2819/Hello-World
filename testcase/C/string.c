@@ -61,7 +61,7 @@ fun(char *s)
             q++;
         }
     }
-    reverse_word(p, q-1);
+    reverse_word(p, q-1); //最后一个单词
     //reverse_word(s, q-1);// ====> ULLY FVs ast
 }
 
