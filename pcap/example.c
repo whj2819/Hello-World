@@ -14,6 +14,7 @@ main(int argc, char *argv[])
         return (2);
     }
 
+
     printf("Device: %s \n", dev);
 
     return 0;
