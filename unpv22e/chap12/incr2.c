@@ -2,7 +2,6 @@
 
 #define SEM_NAME "mysem"
 
-
 int
 main(int argc, char *argv[])
 {
@@ -10,13 +9,11 @@ main(int argc, char *argv[])
     int *ptr;
     sem_t *mutex;
 
-    if (argc != 3) {
+    if (argc != 3)
         err_quit("usage: incr2 <pathname> <#loops> \n");
-        return -1;
-    }
     nloop = atoi(argv[2]);
 
-    fd = Open(argv[1],O_RDWR | O_CREAT,00666);
+    fd = Open(argv[1],O_RDWR | O_CREAT, FILE_MODE);
     Write(fd, &zero,sizeof(int));
     ptr = (int *)Mmap(
                       NULL,
@@ -29,17 +26,17 @@ main(int argc, char *argv[])
 
     close(fd);
 
-    mutex =Sem_open(SEM_NAME,O_CREAT | O_EXCL,00666,1);
+    mutex =Sem_open(SEM_NAME,O_CREAT | O_EXCL,FILE_MODE,1);
     Sem_unlink(SEM_NAME);
 
     setbuf(stdout,NULL);
-
     if (Fork() == 0) {
         for (i=0; i<nloop; i++) {
             Sem_wait(mutex);
             printf("child: %d \n",(*ptr)++);
             Sem_post(mutex);
         }
+        exit(0);
     }
 
     for (i=0; i<nloop; i++) {
@@ -48,5 +45,5 @@ main(int argc, char *argv[])
         Sem_post(mutex);
     }
 
-    return 0;
+    exit(0);
 }

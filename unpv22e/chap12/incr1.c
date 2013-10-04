@@ -15,8 +15,9 @@ main(int argc, char *argv[])
     nloop = atoi(argv[1]);
 
     mutex = Sem_open(
-                    Px_ipc_name(SEM_NAME)
-                    , O_CREATE | O_EXCL
+                    //Px_ipc_name(SEM_NAME)
+                      "/tmp/mysem"
+                    , O_CREAT | O_EXCL
                     , FILE_MODE
                     , 1
                 );
