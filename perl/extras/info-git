@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-my @argv = @ARGV;
+my $var = $ARGV[0];
 sub get_config {
     system(" git config --list");
 }
@@ -41,12 +41,15 @@ print  "\n## Most Recent Commit:";
 &most_recent_commit;
 print  "Type 'git log' for more commits, or 'git show <commit id>' for full commit details.\n";
 
-if ($ARGV[0] ne "--no-config") {
+if (!defined($var)) {
+    $var = "";
+}
+
+if ($var ne "--no-config") {
     print "*" x 80 . "\n";
     print  "## Configuration (.git/config):\n";
     &get_config;
     print "*" x 80 . "\n\n";
 }
-
 
 __END__
