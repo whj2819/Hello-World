@@ -19,8 +19,8 @@ foreach $family (keys %HoA) {
 foreach $family (keys %HoA) {
     print "$family:\n";
     for my $i (0 .. $#{$HoA{$family}}) {
-        print "$i = $HoA{$family}[$i]";
+        print "$i = $HoA{$family}[$i]\n";
     }
     print "\n";
 }
-
+=cut
