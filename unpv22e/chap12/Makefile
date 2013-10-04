@@ -1,6 +1,7 @@
 include ../Make.defines
 
-PROGS = incr1 incr2 incr3 incr_map_anon incr_dev_zero
+PROGS = incr1 incr2 incr3 incr_map_anon incr_dev_zero \
+		test1
 
 all:	${PROGS}
 
@@ -18,5 +19,10 @@ incr_map_anon: incr_map_anon.o
 
 incr_dev_zero:	incr_dev_zero.o
 		${CC} ${CFLAGS} -o $@ incr_dev_zero.o ${LIBS}
+
+test1:	test1.o
+		${CC} ${CFLAGS} -o $@ test1.o ${LIBS}
+
 clean:
 		rm -f ${PROGS} ${CLEANFILES}
+
