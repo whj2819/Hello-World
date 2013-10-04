@@ -5,7 +5,10 @@ get_config() {
 }
 
 most_recent_commit() {
-  git log --max-count=1 --pretty=short
+ # git log --max-count=1 --pretty=short
+ git log --max-count=1 --color --graph \
+ --pretty=format:"%Cred%h%Creset -%C(yellow)%Creset %s \
+%Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit -- 
 }
 
 local_branches() {
