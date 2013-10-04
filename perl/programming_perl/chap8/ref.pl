@@ -11,6 +11,16 @@ my %hash = (
     autumn => 27,
 );
 
+print "$hash{zdd} \n";
 my $sref = \$scalar;
 my $aref = \@array;
 my $href = \%hash;
+
+print "$$sref \n";
+print "${$aref}[2] \n";
+print "${$href}{zdd}\n";
+
+
+
+my $key = keys %{$href};
+print "$key \n";
