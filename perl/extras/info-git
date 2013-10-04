@@ -1,0 +1,52 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+my @argv = @ARGV;
+sub get_config {
+    system(" git config --list");
+}
+
+sub most_recent_commit {
+    my $cmd = "git log --max-count=1 --color --graph ";
+
+    $cmd .= "--pretty=format:'%Cred%h%Creset -%C(yellow)%Creset %s";
+    $cmd .= "%Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --";
+    system($cmd);
+}
+
+sub local_branches {
+    system("git branch ");
+}
+
+sub remote_branches {
+    system("git branch -r");
+}
+
+sub remote_urls {
+    system("git remote -v");
+}
+
+print  "## Remote URLs: \n";
+&remote_urls;
+
+print  "\n## Remote Branches:\n";
+&remote_branches;
+
+print  "\n## Local Branches:\n";
+&local_branches;
+
+print  "\n## Most Recent Commit:";
+&most_recent_commit;
+print  "Type 'git log' for more commits, or 'git show <commit id>' for full commit details.\n";
+
+if ($ARGV[0] ne "--no-config") {
+    print "*" x 80 . "\n";
+    print  "## Configuration (.git/config):\n";
+    &get_config;
+    print "*" x 80 . "\n\n";
+}
+
+
+__END__
