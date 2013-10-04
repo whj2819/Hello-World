@@ -26,8 +26,8 @@ main(int argc, char **argv)
                 , fd
                 , 0
             );
-
     Close(fd);
+
     pagesize = Sysconf(_SC_PAGESIZE);
     printf("PAGESIZE = %ld \n", (long)pagesize);
 
