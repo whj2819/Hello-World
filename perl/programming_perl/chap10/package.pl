@@ -34,9 +34,6 @@ sub populate {
 }
 
 
-
-
-
 =pon
 foreach my $symname  (sort keys %main::) {
     local *sym = $main::{$symname};
