@@ -3,38 +3,51 @@
 use strict;
 use warnings;
 use File::Basename;
-use Term::ANSIColor ;
+#use Term::ANSIColor;
+use Term::ANSIColor qw(:constants);
 
 
 my @files;
 my $argc = @ARGV;
 my $commits;
 my $len;
+my $tmp = "/tmp/tmp.effort";
 my $clear;
-
 $clear = `clear`;
 
-
+# hide cursor
 sub hide_cursor {
     print "\033[?25l";
 }
 
-#
-# # show cursor
-#  #
-#   
+# show cursor
 sub show_cursor {
     printf "\033[?25h";
     printf "\033[m\n";
-    exit 1;
+}
+
+# set color
+sub color_for {
+    my ($f_dot, $commits) = @_;
+    printf "  %s %-10d ",$f_dot, $commits;
+    if ($commits > 0 && $commits <=1) {
+        print BLUE; 
+    } elsif ($commits >= 2 && $commits < 3){
+        print RED; 
+    } else {
+        print GREEN; 
+    }
+
 }
 
 sub heading {
     print "\n";
+    print CYAN;
     printf "  %-45s %-10s %s\n","file", "commits", "active days";
     print "\n";
 }
 
+# get active days
 sub active_days {
     my @log = `git log --pretty='format: %ai' @_ | cut -d ' ' -f 2 | uniq`;
     
@@ -55,7 +68,10 @@ sub effort {
         foreach  ($len .. 48) {
             $f_dot .= $dot;
         }
-        printf "  %s %-10d ",$f_dot, $commits;
+
+        &color_for($f_dot, $commits);
+        #printf "  %s %-10d ",$f_dot, $commits;
+
         $active = &active_days($file);
         printf "  %-10d \n", $active;
     }
@@ -74,10 +90,7 @@ chomp(@files);
 print $clear;
 
 &hide_cursor;
-print color 'red';
 &heading;
 
-print color 'green';
-&effort;
-print color 'reset';
+&effort(@files);
 &show_cursor;
