@@ -1,0 +1,48 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use File::Basename;
+use Term::ANSIColor; 
+
+print color 'bold red';
+
+my @files;
+my @log;
+my $argc = @ARGV;
+my $commits;
+my $len;
+
+sub effort {
+    my $file;
+    my $f_dot;
+    my $dot = '.';  
+    foreach $file (@files) {
+        @log= `git log --oneline $file`;
+        $commits = @log;
+        $len = length($file);
+
+        $f_dot = $file;
+        foreach  ($len .. 50) {
+            $f_dot .= $dot;
+        }
+        print "$f_dot  $commits \n";
+    }
+
+}
+
+
+
+if ($argc >= 1) {
+    @files = @ARGV;
+} else {
+    @files = `git ls-files`;
+}
+
+chomp(@files);
+&effort;
+
+
+
+print color 'reset';
+
