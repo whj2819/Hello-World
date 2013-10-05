@@ -3,30 +3,39 @@
 use strict;
 use warnings;
 use File::Basename;
-use Term::ANSIColor; 
+use Term::ANSIColor ;
 
-print color 'bold red';
 
 my @files;
-my @log;
 my $argc = @ARGV;
 my $commits;
 my $len;
+my $clear;
+
+$clear = `clear`;
+
+sub heading {
+    print "\n";
+    printf "  %-45s %-10s %s\n","file", "commits", "active days";
+    print "\n";
+}
+sub active_days {
+
+}
 
 sub effort {
     my $file;
     my $f_dot;
     my $dot = '.';  
     foreach $file (@files) {
-        @log= `git log --oneline $file`;
-        $commits = @log;
+        $commits= `git log --oneline $file | wc -l`;
         $len = length($file);
 
         $f_dot = $file;
-        foreach  ($len .. 50) {
+        foreach  ($len .. 48) {
             $f_dot .= $dot;
         }
-        print "$f_dot  $commits \n";
+        printf "  %s %-10d \n",$f_dot, $commits;
     }
 
 }
@@ -40,9 +49,13 @@ if ($argc >= 1) {
 }
 
 chomp(@files);
+print $clear;
+
+print color 'red';
+&heading;
+print color 'reset';
+
+print color 'green';
 &effort;
-
-
-
 print color 'reset';
 
