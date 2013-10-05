@@ -6,10 +6,10 @@ use Term::ANSIColor qw(:constants);
 
 
 my @files;
-my $argc = @ARGV;
+my $argc; 
 my $commits;
 my $len;
-my $tmp = "/tmp/tmp.effort";
+my $above = 0;
 my $clear;
 $clear = `clear`;
 
@@ -37,6 +37,9 @@ sub color_for {
     printf "  %s %-10d ",$f_dot, $commits;
 }
 
+#
+# print heading
+#
 sub heading {
     print "\n";
     print CYAN;
@@ -59,22 +62,31 @@ sub effort {
 
     foreach $file (@files) {
         $commits= `git log --oneline $file | wc -l`;
-        $len = length($file);
 
+        #ignore <= above
+        next if $commits <= $above ;
+
+        $len = length($file);
         $f_dot = $file;
         foreach  ($len .. 48) {
             $f_dot .= $dot;
         }
-
         &color_for($f_dot, $commits);
         $active = &active_days($file);
         printf "  %-10d \n", $active;
     }
-
 }
 
 
+# --above <显示above条以上的信息>
+if ($ARGV[0] eq "--above") {
+    shift @ARGV;
+    $above = $ARGV[0];
+    shift @ARGV;
+}
 
+
+$argc = @ARGV;
 if ($argc >= 1) {
     @files = @ARGV;
 } else {
@@ -82,10 +94,16 @@ if ($argc >= 1) {
 }
 
 chomp(@files);
+
+# clear screen
 print $clear;
 
 &hide_cursor;
 &heading;
 
+#
+# loop files
+#
 &effort(@files);
+
 &show_cursor;
