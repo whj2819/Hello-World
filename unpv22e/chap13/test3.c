@@ -1,6 +1,5 @@
 #include "unpipc.h"
 
-
 int
 main(int argc, char *argv[])
 {
@@ -12,29 +11,26 @@ main(int argc, char *argv[])
         err_quit("usage: test3 <name>");
 
     printf("[%s] \n",argv[1]);
-    Shm_unlink(Px_ipc_name(argv[1]) );
+    shm_unlink(Px_ipc_name(argv[1]) );
     fd1 = Shm_open(Px_ipc_name(argv[1]),O_RDWR | O_CREAT | O_EXCL,FILE_MODE);
     Ftruncate(fd1,sizeof(int));
     fd2 = Open("/etc/motd",O_RDONLY);
-    Fstat(fd2,&stat);
+    Fstat(fd2, &stat);
 
     if ( (childpid = Fork()) == 0) {
         ptr2 = Mmap(NULL,stat.st_size,PROT_READ,MAP_SHARED,fd2,0);
         ptr1 = Mmap(NULL,sizeof(int),PROT_READ | PROT_WRITE,MAP_SHARED,fd1,0);
-        printf("child: shm ptr = %p, motd ptr = %p\n",ptr1,ptr2);
+        printf("child: shm ptr1 = %p, motd ptr2 = %p\n",ptr1,ptr2);
         sleep(5);
         printf("shared memory integer = %d\n",*ptr1);
         exit(0);
     }
 
-
-    printf("[%d] \n",stat.st_size);
-
     ptr1 = Mmap(NULL,sizeof(int),PROT_READ | PROT_WRITE,MAP_SHARED,fd1,0);
     ptr2 = Mmap(NULL,stat.st_size,PROT_READ,MAP_SHARED,fd2,0);
-    printf("parent: shm ptr = %p, motd ptr = %p\n",ptr1,ptr2);
+    printf("parent: shm ptr1 = %p, motd ptr2 = %p\n",ptr1,ptr2);
     *ptr1 = 777;
 
-    waitpid(childpid,NULL,0);
+    Waitpid(childpid,NULL,0);
     exit(0);
 }
