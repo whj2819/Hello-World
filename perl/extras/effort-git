@@ -2,8 +2,6 @@
 
 use strict;
 use warnings;
-use File::Basename;
-#use Term::ANSIColor;
 use Term::ANSIColor qw(:constants);
 
 
@@ -29,15 +27,14 @@ sub show_cursor {
 # set color
 sub color_for {
     my ($f_dot, $commits) = @_;
-    printf "  %s %-10d ",$f_dot, $commits;
-    if ($commits > 0 && $commits <=1) {
+    if ($commits >=1 && $commits <=1) {
         print BLUE; 
     } elsif ($commits >= 2 && $commits < 3){
         print RED; 
     } else {
         print GREEN; 
     }
-
+    printf "  %s %-10d ",$f_dot, $commits;
 }
 
 sub heading {
@@ -70,8 +67,6 @@ sub effort {
         }
 
         &color_for($f_dot, $commits);
-        #printf "  %s %-10d ",$f_dot, $commits;
-
         $active = &active_days($file);
         printf "  %-10d \n", $active;
     }
