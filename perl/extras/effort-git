@@ -14,19 +14,39 @@ my $clear;
 
 $clear = `clear`;
 
+
+sub hide_cursor {
+    print "\033[?25l";
+}
+
+#
+# # show cursor
+#  #
+#   
+sub show_cursor {
+    printf "\033[?25h";
+    printf "\033[m\n";
+    exit 1;
+}
+
 sub heading {
     print "\n";
     printf "  %-45s %-10s %s\n","file", "commits", "active days";
     print "\n";
 }
-sub active_days {
 
+sub active_days {
+    my @log = `git log --pretty='format: %ai' @_ | cut -d ' ' -f 2 | uniq`;
+    
+    return @log;
 }
 
 sub effort {
     my $file;
     my $f_dot;
     my $dot = '.';  
+    my $active;
+
     foreach $file (@files) {
         $commits= `git log --oneline $file | wc -l`;
         $len = length($file);
@@ -35,7 +55,9 @@ sub effort {
         foreach  ($len .. 48) {
             $f_dot .= $dot;
         }
-        printf "  %s %-10d \n",$f_dot, $commits;
+        printf "  %s %-10d ",$f_dot, $commits;
+        $active = &active_days($file);
+        printf "  %-10d \n", $active;
     }
 
 }
@@ -51,11 +73,11 @@ if ($argc >= 1) {
 chomp(@files);
 print $clear;
 
+&hide_cursor;
 print color 'red';
 &heading;
-print color 'reset';
 
 print color 'green';
 &effort;
 print color 'reset';
-
+&show_cursor;
