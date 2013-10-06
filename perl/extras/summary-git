@@ -76,7 +76,7 @@ sub author {
                 $minus += $+{minus};
             }   
         } 
-        printf "\e[36m%-d\t%-d\e[0m \n", $plus, $minus;
+        printf "\e[36m%-ld\t%-ld\e[0m \n", $plus, $minus;
         $i++;
     }
 }
