@@ -7,8 +7,10 @@ use File::Basename;
 my $project;
 my $path = `pwd`;
 my $commit = '';
+my $file ="/tmp/lines.txt";
 
 $project = basename($path);
+
 #
 # 获取建立仓库的时间
 #
@@ -44,7 +46,8 @@ sub author {
     my $total = 0;
     my @tmp;
     my $i  = 0;
-
+    my $plus = 0;
+    my $minus = 0;
 
     chomp(@log);
     chomp(@author);
@@ -57,8 +60,23 @@ sub author {
     chomp(@commits);
     $i = 0;
     foreach (@commits) {
-        printf "\e[36m\t%-15s %-d(%2.1f%%)\e[0m\n",
-                           $author[$i], $commits[$i], 100 * $commits[$i]/$total;
+        # 显示每位作者commits的数量
+        printf "\e[36m  %-10s\t%-d(%2.1f%%)\t      \e[0m", 
+                           $author[$i], $commits[$i], 100*$commits[$i]/$total;
+
+        # 统计每位作者添加/删除代码的行数.
+        `git log --numstat --oneline  --pretty=format:"" --author=$author[$i]  > $file`;
+        open LINES , "< $file" or die "can't open file! \n";
+
+        $plus = 0;
+        $minus = 0;
+        while(<LINES>) {
+            if ($_ =~ /(?<plus>\d+)\s+(?<minus>\d+)/ ) {
+                $plus += $+{plus};
+                $minus += $+{minus};
+            }   
+        } 
+        printf "\e[36m%-d\t%-d\e[0m \n", $plus, $minus;
         $i++;
     }
 }
@@ -81,6 +99,6 @@ if (!defined $commit) {
     print "\e[32mfiles    : $file_count\e[0m";
 }
 
-print "\tAuthor\t\tCommits\t\t+lines\t-lines: \n";
+print "  Author\tCommits  \t+lines\t\t-lines: \n";
 &author;
-
+system('rm -rf /tmp/lines.txt');
