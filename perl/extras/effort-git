@@ -15,7 +15,6 @@ my $tmp = "/tmp/.effort-git";
 $clear = `clear`;
 
 
-
 open EFFORT, "> $tmp";
 
 # hide cursor
@@ -31,16 +30,19 @@ sub show_cursor {
 
 # set color
 sub color_for {
-    my ($f_dot, $commits) = @_;
+    my ($f_dot, $commits, $active) = @_;
     if ($commits >=1 && $commits <=1) {
         print BLUE; 
+        print EFFORT BLUE; 
     } elsif ($commits >= 2 && $commits < 3){
         print RED; 
+        print EFFORT RED; 
     } else {
         print GREEN; 
+        print EFFORT GREEN; 
     }
-    printf "  %s %-10d ",$f_dot, $commits;
-    print EFFORT  $f_dot, $commits;
+    printf "  %s %-10d %-10d \n",$f_dot, $commits, $active;
+    printf EFFORT "  %s %-10d %-10d \n",$f_dot, $commits, $active;
 }
 
 #
@@ -77,9 +79,8 @@ sub effort {
         foreach  ($len .. 48) {
             $f_dot .= $dot;
         }
-        &color_for($f_dot, $commits);
         $active = &active_days($file);
-        printf "  %-10d \n", $active;
+        &color_for($f_dot, $commits, $active);
     }
 }
 
@@ -112,4 +113,10 @@ print $clear;
 #
 &effort(@files);
 
+print "\n\n";
+&heading;
+system("sort -rn -k 3 $tmp");
+print "\n\n";
+
+print RESET;
 &show_cursor;
