@@ -1,0 +1,48 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use File::Basename;
+
+my $project;
+my $path = `pwd`;
+my $commit = '';
+
+$project = basename($path);
+
+sub repository_age {
+    `git log --pretty=oneline --format="%ar" | tail -n1 | sed 's/ago/ /'`;
+}
+
+sub active_days {
+    `git log --pretty='format %ai' | cut -d ' ' -f 2 | uniq | wc -l`;
+}
+
+sub commit_count{
+    `git log --oneline $commit | wc -l`;
+}
+
+sub file_count {
+    `git ls-files | wc -l`;
+
+}
+
+my $repo_age = &repository_age;
+my $active_days = &active_days;
+my $commit_count = &commit_count;
+my $file_count = &file_count;
+
+chomp($active_days);
+
+print "\nproject  : $project";
+print "repo age : $repo_age";
+print "active   : \e[34m$active_days days\e[0m\n";
+
+
+
+print "commits  : $commit_count";
+
+$commit = shift @ARGV;
+if (!defined $commit) {
+    print "files    : $file_count";
+}
