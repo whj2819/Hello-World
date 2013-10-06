@@ -11,7 +11,12 @@ my $commits;
 my $len;
 my $above = 0;
 my $clear;
+my $tmp = "/tmp/.effort-git";
 $clear = `clear`;
+
+
+
+open EFFORT, "> $tmp";
 
 # hide cursor
 sub hide_cursor {
@@ -35,6 +40,7 @@ sub color_for {
         print GREEN; 
     }
     printf "  %s %-10d ",$f_dot, $commits;
+    print EFFORT  $f_dot, $commits;
 }
 
 #

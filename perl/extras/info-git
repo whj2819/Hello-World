@@ -2,10 +2,13 @@
 
 use strict;
 use warnings;
+use Term::ANSIColor qw(:constants);
 
 my $var = $ARGV[0];
 sub get_config {
+    print CYAN;
     system(" git config --list");
+    print RESET;
 }
 
 sub most_recent_commit {
@@ -25,7 +28,9 @@ sub remote_branches {
 }
 
 sub remote_urls {
+    print GREEN;
     system("git remote -v");
+    print RESET;
 }
 
 print  "## Remote URLs: \n";
