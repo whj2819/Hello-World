@@ -2,7 +2,6 @@
 
 use strict;
 use warnings;
-use Term::ANSIColor qw(:constants);
 
 
 my @files;
@@ -12,6 +11,7 @@ my $len;
 my $above = 0;
 my $clear;
 my $tmp = "/tmp/.effort-git";
+my $color;
 $clear = `clear`;
 
 
@@ -30,19 +30,22 @@ sub show_cursor {
 
 # set color
 sub color_for {
-    my ($f_dot, $commits, $active) = @_;
-    if ($commits >=1 && $commits <=1) {
-        print BLUE; 
-        print EFFORT BLUE; 
-    } elsif ($commits >= 2 && $commits < 3){
-        print RED; 
-        print EFFORT RED; 
+    my $var = shift @_; 
+    if ($var>0 && $var<10) {
+        $color = '33';
+    } elsif ($var> 10 && $var< 25){
+        $color = '33;1'; 
+    } elsif ($var> 25 && $var< 50){
+        $color = '93'; 
+    } elsif ($var> 50 && $var< 75){
+        $color = '93;1'; 
+    } elsif ($var> 75 && $var< 100){
+        $color = '31'; 
+    } elsif ($var> 75 && $var< 100){
+        $color = '31;1'; 
     } else {
-        print GREEN; 
-        print EFFORT GREEN; 
+        $color = '34';
     }
-    printf "  %s %-10d %-10d \n",$f_dot, $commits, $active;
-    printf EFFORT "  %s %-10d %-10d \n",$f_dot, $commits, $active;
 }
 
 #
@@ -50,8 +53,7 @@ sub color_for {
 #
 sub heading {
     print "\n";
-    print CYAN;
-    printf "  %-45s %-10s %s\n","file", "commits", "active days";
+    printf "\033[36m  %-45s %-10s %s\n","file", "commits", "active days";
     print "\n";
 }
 
@@ -79,8 +81,13 @@ sub effort {
         foreach  ($len .. 48) {
             $f_dot .= $dot;
         }
+
+        &color_for($commits);
+        printf EFFORT "  \033[${color}m%s %-10d", $f_dot, $commits;
+
         $active = &active_days($file);
-        &color_for($f_dot, $commits, $active);
+        &color_for($active);
+        printf EFFORT "\033[${color}m%-10d\n", $active; 
     }
 }
 
@@ -116,8 +123,7 @@ print $clear;
 
 print "\n\n";
 &heading;
-system("sort -rn -k 3 $tmp");
+system("sort -rn -k 2 $tmp");
 print "\n\n";
 
-print RESET;
 &show_cursor;
