@@ -24,7 +24,32 @@ sub commit_count{
 
 sub file_count {
     `git ls-files | wc -l`;
+}
 
+sub author {
+    my @author = `git log --pretty='format:%an' | sort -r | uniq`;
+    my @log =  `git shortlog -n -s $commit`; 
+    my @commits;
+    my $total = 0;
+    my @tmp;
+    my $i  = 0;
+
+
+    chomp(@log);
+    chomp(@author);
+    foreach (@author) {
+        $commits[$i++] = `git log --oneline --author=$_  | wc -l | tr -d ' '`;
+    }
+
+    @tmp= `git rev-list --all`;
+    $total = @tmp;
+    chomp(@commits);
+    $i = 0;
+    foreach (@commits) {
+        printf "\e[36m\t%-15s %-d(%2.1f%%)\e[0m\n",
+                           $author[$i], $commits[$i], 100 * $commits[$i]/$total;
+        $i++;
+    }
 }
 
 my $repo_age = &repository_age;
@@ -37,12 +62,14 @@ chomp($active_days);
 print "\nproject  : $project";
 print "repo age : $repo_age";
 print "active   : \e[34m$active_days days\e[0m\n";
-
-
-
 print "commits  : $commit_count";
 
 $commit = shift @ARGV;
 if (!defined $commit) {
+    $commit = '';
     print "files    : $file_count";
 }
+
+print "\tAuthor\t\tCommits: \n";
+&author;
+
