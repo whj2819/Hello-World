@@ -1,4 +1,4 @@
-PROGS = tmp demo1 demo2 demo5 demo8 echoall identify
+PROGS = demo1 demo2 demo5 demo8 echoall identify
 CC = gcc
 CFLAG = -Wall -g
 CLEANFILES= *.out *.o
