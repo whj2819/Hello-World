@@ -3,12 +3,14 @@
 #include <time.h>
 #include "pr_mask.c"
 
-static void sig_usr1(int),sig_alrm(int);
+static void
+sig_usr1(int),sig_alrm(int);
 
 static sigjmp_buf    jmpbuf;
 static volatile sig_atomic_t    canjump;
 
-int main(void)
+int 
+main(void)
 {
     if (signal(SIGUSR1,sig_usr1) == SIG_ERR) {
         err_sys("signal(SIGUSR1) error");
@@ -29,7 +31,8 @@ int main(void)
     }
 }
 
-static void sig_usr1(int signo)
+static 
+void sig_usr1(int signo)
 {
     time_t starttime;
 
@@ -48,12 +51,12 @@ static void sig_usr1(int signo)
     */
 
     pr_mask("finishing sig_usr1:");
-
     canjump = 0;
     siglongjmp(jmpbuf,1);
 }
 
-static void sig_alrm(int signo)
+static void 
+sig_alrm(int signo)
 {
     pr_mask("in sig_alrm");
 }
