@@ -4,7 +4,6 @@
 
 
 
-
 void pr_mask(const char *str)
 {
     sigset_t sigset;
