@@ -1,4 +1,4 @@
-PROGS = demo1 demo2 demo3 demo15
+PROGS = demo1 demo2 demo3 demo11 demo15
 
 CC = gcc
 CFLAG = -Wall -g
@@ -14,6 +14,9 @@ demo2: demo2.o
 
 demo3: demo3.o
 	${CC} ${CFLAG} -o $@ demo3.c ${LIB}
+
+demo11: demo11.o
+	${CC} ${CFLAG} -o $@ demo11.c ${LIB}
 
 demo15: demo15.o
 	${CC} ${CFLAG} -o $@ demo15.c ${LIB}
