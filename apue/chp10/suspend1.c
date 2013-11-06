@@ -2,9 +2,8 @@
 #include <stdlib.h>
 #include <errno.h>
 
-
-
-void pr_mask(const char *str)
+void 
+pr_mask(const char *str)
 {
     sigset_t sigset;
     int errno_save;
@@ -15,13 +14,12 @@ void pr_mask(const char *str)
 
     printf("%s",str);
 
-    if (sigismember(&sigset, SIGINT)) err_sys("SIGINT ");
-    if (sigismember(&sigset, SIGQUIT)) err_sys("SIGQUIT ");
-    if (sigismember(&sigset, SIGUSR1)) err_sys("SIGUSR1 ");
-    if (sigismember(&sigset, SIGALRM)) err_sys("SIGALRM ");
+    if (sigismember(&sigset, SIGINT)) printf("SIGINT ");
+    if (sigismember(&sigset, SIGQUIT)) printf("SIGQUIT ");
+    if (sigismember(&sigset, SIGUSR1)) printf("SIGUSR1 ");
+    if (sigismember(&sigset, SIGALRM)) printf("SIGALRM ");
 
     /* remaining signals can go here */
-
     printf("\n");
     errno = errno_save;
 }
@@ -29,7 +27,7 @@ void pr_mask(const char *str)
 static void
 sig_int(int signo)
 {
-    pr_mask("\n in sig_int :\n");
+    pr_mask("\n in sig_int : ");
 }
 
 int
@@ -47,23 +45,20 @@ main(void)
     sigemptyset(&newmask);
     sigaddset(&newmask, SIGINT);
 
-    if ( sigprocmask(SIG_BLOCK, &newmask, &oldmask) < 0)
+    if (sigprocmask(SIG_BLOCK, &newmask, &oldmask) < 0)
         err_sys("sig block error ");
+    pr_mask("in critical region :");
 
-    pr_mask("in critical region ");
-
+/*
+ * 用waitmask 临时替换当前屏蔽字newmask
+ */
     if (sigsuspend(&waitmask) != -1)
         err_sys("sigsuspend error");
 
-    pr_mask("after return from sigsuspend");
-
-
+    pr_mask("after return from sigsuspend: ");
     if ( sigprocmask(SIG_SETMASK, &oldmask, NULL) < 0)
         err_sys(" sig_setmask error ");
-
 
     pr_mask("program exit :");
     exit(0);
 }
-
-

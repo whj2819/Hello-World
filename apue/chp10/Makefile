@@ -1,4 +1,4 @@
-PROGS = demo1 demo2 demo3 demo11 demo15
+PROGS = demo1 demo2 demo3 demo11 suspend1 suspend2
 
 CC = gcc
 CFLAG = -Wall -g
@@ -18,8 +18,11 @@ demo3: demo3.o
 demo11: demo11.o
 	${CC} ${CFLAG} -o $@ demo11.c ${LIB}
 
-demo15: demo15.o
-	${CC} ${CFLAG} -o $@ demo15.c ${LIB}
+suspend1: suspend1.o
+	${CC} ${CFLAG} -o $@ suspend1.c ${LIB}
+
+suspend2: suspend2.o
+	${CC} ${CFLAG} -o $@ suspend2.c ${LIB}
 
 clean:
 	rm -f ${PROGS} ${CLEANFILES}
