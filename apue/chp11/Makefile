@@ -1,4 +1,4 @@
-PROGS = threadid exitstatus
+PROGS = threadid exitstatus cleanup
 
 CC = gcc
 CFLAG = -Wall -g -lpthread
@@ -11,6 +11,9 @@ threadid: threadid.o
 
 exitstatus: exitstatus.o 
 	${CC} ${CFLAG} -o $@ exitstatus.c ${LIB}
+
+cleanup: cleanup.o 
+	${CC} ${CFLAG} -o $@ cleanup.c ${LIB}
 
 
 
