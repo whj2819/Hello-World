@@ -1,13 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
 
-extern void eprintf(const char *format, ...)\
-           __attribute__((format(printf, 1, 2)));
-
-
-void
-foo()
+void 
+f(void)
 {
-    eprintf("s = %s\n", 5);
-    /* eprintf("n = %d, %d, %d \n", 1, 2); */
+    int *x = malloc( 10 * sizeof(int) );
+
+    x[10] = 0;
 
 }
+
+
+int main(int argc, const char *argv[])
+{
+    int i;
+    char a[1024] = {0};
+
+    f();
+    
+    printf("i = %d \n", i);
+
+    return 0;
+}
+
 

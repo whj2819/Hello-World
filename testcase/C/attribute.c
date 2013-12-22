@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-
 static __attribute__((constructor)) void before()
 {
     printf("hello\n");
@@ -16,6 +15,4 @@ int main(int argc, const char *argv[])
     
     return 0;
 }
-
-
 

@@ -1,18 +1,22 @@
 #include <stdio.h>
-
+#include <stdlib.h>
 
 int
-main(int argc,char **argv)
+main(void)
 {
-    unsigned short a = 0x55ac;
-    unsigned char b = 0;
+    int *p = (int *)malloc(sizeof(int));
+    int *q = (int *)malloc(sizeof(int));
+    int i;
 
 
-    b = ((a & 0x03) << 6) | ((a & 0x03) << 4)\
-        |((a & 0x03) << 2) | (a & 0x03);
+    for (i = 0; i < 400; i++) {
+        p[i] = i;
+    }
+    q[0] = 0;
+
+    free(q);
+    free(p);
 
 
-    printf("____ 0x%x \n",a);
-    printf("==== 0x%x \n",b);
     return 0;
 }
