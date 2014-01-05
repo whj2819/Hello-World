@@ -14,7 +14,6 @@ main(void)
         cnt ++;
         x = x & (x-1);
     }
-
     printf("[%d]\n", cnt);
 
     return 0;
