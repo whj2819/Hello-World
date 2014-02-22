@@ -8,6 +8,8 @@ typedef struct NODE {
     int value;
 }Node;
 
+
+#if 0
 int
 sll_insert(Node **rootp, int new_value)
 {
@@ -38,6 +40,34 @@ sll_insert(Node **rootp, int new_value)
     } else {
         previous->link = new;
     }
+
+    return 0;
+}
+#endif
+
+int
+sll_insert(Node **linkp, int new_value)
+{
+
+    Node *current;
+    Node *new;
+
+
+    current = *linkp;
+    while ( current != NULL && current->value < new_value) {
+        linkp = &current->link;
+        current = *linkp;
+    }
+
+    new = (Node *)malloc( sizeof(Node) );
+    if ( new == NULL ) {
+        printf("malloc new node err! \n");
+        return -1;
+    }
+    new->value = new_value;
+
+    new->link = current;
+    *linkp = new;
 
     return 0;
 }
