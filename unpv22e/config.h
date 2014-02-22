@@ -53,9 +53,9 @@
 /* #undef	int8_t */				/* <sys/types.h> */
 /* #undef	int16_t */				/* <sys/types.h> */
 /* #undef	int32_t */				/* <sys/types.h> */
-/* #define	uint8_t unsigned char */				/* <sys/types.h> */
-/* #define	uint16_t unsigned short */				/* <sys/types.h> */
-/* #define	uint32_t unsigned int */				/* <sys/types.h> */
+#define	uint8_t unsigned char				/* <sys/types.h> */
+#define	uint16_t unsigned short				/* <sys/types.h> */
+#define	uint32_t unsigned int				/* <sys/types.h> */
 /* #undef	size_t */				/* <sys/types.h> */
 /* #undef	ssize_t */				/* <sys/types.h> */
 

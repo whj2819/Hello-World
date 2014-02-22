@@ -8,7 +8,7 @@ int
 main(void)
 {
     int cnt = 0;
-    int x = 7;
+    int x = 9999;
 
     while (x) {
         cnt ++;
