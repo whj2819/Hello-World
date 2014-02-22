@@ -56,10 +56,12 @@ int main(int argc, const char *argv[])
 
     sll_insert(&root, 10);
     sll_insert(&root, 15);
+    sll_insert(&root, 20);
+    sll_insert(&root, 3);
 
 
     for(; root != NULL;) {
-        printf("->[%d] \n", root->value);
+        printf("value->[%d] \n", root->value);
         root = root->link;
     }
 
