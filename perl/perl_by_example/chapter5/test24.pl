@@ -23,5 +23,5 @@ for ($i = 0;$i < $#stores + 1;$i++) {
     printf $stores[$i]->{"Employees"}."\n";
     printf $stores[$i]->{"Registers"}."\n";
     printf $stores[$i]->{"Sales"}."\n";
-    print "-" x 20,"\n";
+    print "-" x 20,"\n\n";
 }
