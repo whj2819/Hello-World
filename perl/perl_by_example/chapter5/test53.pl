@@ -24,3 +24,16 @@ foreach my $key (sort keys(%weekday)) {
     print "$key ";
 }
 print "\n";
+
+
+
+my ($key,$value);
+while( ($key, $value) = each(%weekday)) {
+    print "$key = $value \n";
+}
+print "\n";
+
+
+
+
+
