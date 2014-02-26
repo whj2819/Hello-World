@@ -12,7 +12,7 @@ $name = "Steve";
 print "In boy \$name is $name \n";
 
 $main::friend = "Patricia";
-print "In boy \@town is @::town \n";
+print "In boy \@town is @main::town \n";
 
 package main;
 print "In main: \$name is $name \n";
