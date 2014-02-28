@@ -2,23 +2,22 @@ package House;
 
 sub new {
     my $class = shift;
+    my ($owner, $salary) = @_;
     my $ref = {
-        Owner => undef,
-        Price => undef,
+        Owner => $owner,
+        Price => $salary,
     };
     bless ($ref, $class);
 
     return $ref;
 }
 
-sub set_owner {
+sub display_object {
     my $self = shift;
-    $self->{Owner} = shift;
-}
 
-sub display_owner {
-    my $self = shift;
-    print $self->{Owner}, "\n";
+    while ( ($key, $value) = each %$self) {
+        print "$key: $value \n";
+    }
 }
 
 
