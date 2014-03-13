@@ -1,11 +1,11 @@
 include ../Make.defines
 
-PROGS = mqcreate
+PROGS = mqcreatel
 
 all:	${PROGS}
 
-mqcreate:	mqcreate.o
-		${CC} ${CFLAGS} -o $@ mqcreate.o ${LIBS}
+mqcreatel:	mqcreatel.o
+		${CC} ${CFLAGS} -o $@ mqcreatel.o ${LIBS}
 
 clean:
 		rm -f ${PROGS} ${CLEANFILES}
