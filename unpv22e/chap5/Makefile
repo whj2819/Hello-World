@@ -1,6 +1,7 @@
 include ../Make.defines
 
-PROGS = mqcreatel mqcreate mqunlink mqgetattr
+PROGS = mqcreatel mqcreate mqunlink mqgetattr mqsend mqreceive \
+		mqsysconf
 
 all:	${PROGS}
 
@@ -15,6 +16,15 @@ mqunlink:   mqunlink.o
 
 mqgetattr:	mqgetattr.o
 		${CC} ${CFLAGS} -o $@ mqgetattr.o ${LIBS}
+
+mqsend:	mqsend.o
+		${CC} ${CFLAGS} -o $@ mqsend.o ${LIBS}
+
+mqreceive:	mqreceive.o
+		${CC} ${CFLAGS} -o $@ mqreceive.o ${LIBS}
+
+mqsysconf:	mqsysconf.o
+		${CC} ${CFLAGS} -o $@ mqsysconf.o ${LIBS}
 
 clean:
 		rm -f ${PROGS} ${CLEANFILES}
