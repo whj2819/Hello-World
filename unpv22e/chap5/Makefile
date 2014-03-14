@@ -1,7 +1,7 @@
 include ../Make.defines
 
 PROGS = mqcreatel mqcreate mqunlink mqgetattr mqsend mqreceive \
-		mqsysconf mqnotifysig1 mqnotifysig2
+		mqsysconf mqnotifysig1 mqnotifysig2 mqnotifysig3 mqnotifysig4
 
 all:	${PROGS}
 
@@ -31,6 +31,12 @@ mqnotifysig1:	mqnotifysig1.o
 
 mqnotifysig2:	mqnotifysig2.o
 		${CC} ${CFLAGS} -o $@ mqnotifysig2.o ${LIBS}
+
+mqnotifysig3:	mqnotifysig3.o
+		${CC} ${CFLAGS} -o $@ mqnotifysig3.o ${LIBS}
+
+mqnotifysig4:	mqnotifysig4.o
+		${CC} ${CFLAGS} -o $@ mqnotifysig4.o ${LIBS}
 
 clean:
 		rm -f ${PROGS} ${CLEANFILES}

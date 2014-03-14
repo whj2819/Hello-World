@@ -8,12 +8,14 @@ struct sigevent sigev;
 
 static void sig_usr1(int);
 
+#if 0
 void
 my_handle(union sigval v)
 {
     printf("my handle %d\n", v);
-
 }
+#endif
+
 int
 main(int argc, char *argv[])
 {
