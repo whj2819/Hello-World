@@ -47,7 +47,6 @@ int main(int argc, const char *argv[])
         exit(0);
     }
 
-
     sleep(3);
     for (i = SIGRTMAX; i >= SIGRTMAX - 2; i--) {
         for (j = 0; j <= 2 ; j++) {

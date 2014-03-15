@@ -25,6 +25,7 @@ struct {
 void *
 produce(void *arg)
 {
+    int dosignal;
    for (; ;) {
        Pthread_mutex_lock(&put.mutex);
        if (put.nput >= nitems){
@@ -37,11 +38,25 @@ produce(void *arg)
        Pthread_mutex_unlock(&put.mutex);
 
 
+       /*
+        * 避免上锁冲突.
+        *
+        */
+       Pthread_mutex_lock(&nready.mutex);
+       dosignal = ( nready.nready == 0);
+       nready.nready++;
+       Pthread_mutex_unlock(&nready.mutex);
+
+       if (dosignal)
+           Pthread_cond_signal(&nready.cond);
+
+#if 0 
        Pthread_mutex_lock(&nready.mutex);
        if (nready.nready == 0)
            Pthread_cond_signal(&nready.cond);
        nready.nready++;
        Pthread_mutex_unlock(&nready.mutex);
+#endif
        *((int *)arg) += 1;
    }
 }
