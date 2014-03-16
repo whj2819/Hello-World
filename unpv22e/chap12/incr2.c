@@ -1,6 +1,7 @@
 #include "unpipc.h"
 
-#define SEM_NAME "mysem"
+/* #define SEM_NAME "mysem" */
+#define SEM_NAME "/tmp.mysem"
 
 int
 main(int argc, char *argv[])
@@ -44,6 +45,8 @@ main(int argc, char *argv[])
         printf("parent: %d \n",(*ptr)++);
         Sem_post(mutex);
     }
+
+    /* msync(NULL, sizeof(int),MS_SYNC); */ 
 
     exit(0);
 }

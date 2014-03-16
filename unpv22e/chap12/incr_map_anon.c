@@ -9,8 +9,8 @@ main(int argc, char *argv[])
     int *ptr;
     sem_t *mutex;
 
-    if (argc != 3)
-        err_quit("usage: incr_map_anon <pathname> <#loops> \n");
+    if (argc != 2)
+        err_quit("usage: incr_map_anon <#loops> \n");
     nloop = atoi(argv[2]);
 
     ptr = Mmap(
@@ -22,7 +22,7 @@ main(int argc, char *argv[])
                   0
                 );
 
-    mutex =Sem_open(SEM_NAME,O_CREAT | O_EXCL,FILE_MODE,1);
+    mutex = Sem_open(SEM_NAME,O_CREAT | O_EXCL,FILE_MODE,1);
     Sem_unlink(SEM_NAME);
 
     setbuf(stdout,NULL);
