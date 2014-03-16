@@ -1,6 +1,7 @@
 include ../Make.defines
 
-PROGS = semcreate semunlink semwait sempost semgetvalue
+PROGS = semcreate semunlink semwait sempost semgetvalue \
+		prodcons2 prodcons3
 
 all:	${PROGS}
 
@@ -20,5 +21,10 @@ sempost:	sempost.o
 semgetvalue:	semgetvalue.o
 		${CC} ${CFLAGS} -o $@ semgetvalue.o ${LIBS}
 
+prodcons2:	prodcons2.o
+		${CC} ${CFLAGS} -o $@ prodcons2.o ${LIBS}
+
+prodcons3:	prodcons3.o
+		${CC} ${CFLAGS} -o $@ prodcons3.o ${LIBS}
 clean:
 		rm -f ${PROGS} ${CLEANFILES}
