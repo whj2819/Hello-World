@@ -9,9 +9,9 @@ main(int argc, char *argv[])
     int *ptr;
     sem_t *mutex;
 
-    if (argc != 3)
-        err_quit("usage: incr_dev_zero <pathname> <#loops> \n");
-    nloop = atoi(argv[2]);
+    if (argc != 2)
+        err_quit("usage: incr_dev_zero <#loops> \n");
+    nloop = atoi(argv[1]);
 
     fd = Open("/dev/zero", O_RDWR); 
     ptr = Mmap(
