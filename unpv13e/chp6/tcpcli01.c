@@ -20,6 +20,7 @@ main(int argc, char **argv)
 
     Connect(sockfd, (SA*)&servaddr, sizeof(servaddr) );
 
+    printf("stdin = %d, sockfd = %d \n", fileno(stdin), sockfd);
     str_cli(stdin, sockfd);
 
     exit(0); 

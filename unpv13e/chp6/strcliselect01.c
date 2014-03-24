@@ -6,6 +6,7 @@ str_cli(FILE *fp, int sockfd)
     int maxfdp1;
     fd_set rset;
     char sendline[MAXLINE], recvline[MAXLINE];
+    int nready = 0;
 
     FD_ZERO(&rset);
     for (; ;) {
@@ -13,7 +14,7 @@ str_cli(FILE *fp, int sockfd)
         FD_SET(sockfd, &rset);
         maxfdp1 = max(fileno(fp), sockfd) + 1;
 
-        Select(maxfdp1, &rset, NULL, NULL, NULL);
+        nready = Select(maxfdp1, &rset, NULL, NULL, NULL);
 
         if (FD_ISSET(sockfd, &rset) ) {
             if (Readline(sockfd, recvline, MAXLINE) == 0) 
