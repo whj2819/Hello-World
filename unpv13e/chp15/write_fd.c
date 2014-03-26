@@ -13,18 +13,18 @@ write_fd(int fd, void *ptr, size_t nbytes, int sendfd)
      * 
      * */
     union {
-        struct cmghdr cm;
+        struct cmsghdr cm;
         char control[CMSG_SPACE(sizeof(int))]; 
     }control_un;
-    struct cmghdr *cmptr;
+    struct cmsghdr *cmptr;
 
     msg.msg_control = control_un.control;
     msg.msg_controllen = sizeof(control_un.control);
 
     cmptr = CMSG_FIRSTHDR(&msg);
     cmptr->cmsg_len = CMSG_LEN(sizeof(int));
-    cmptr->level = SOL_SOCKET;
-    cmptr->type = SCM_RIGHTS;
+    cmptr->cmsg_level = SOL_SOCKET;
+    cmptr->cmsg_type = SCM_RIGHTS;
     *((int *)CMSG_DATA(cmptr)) = sendfd;
 #else
     msg.msg_accrights = (caddr_t) & sendfd;

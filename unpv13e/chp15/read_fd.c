@@ -15,10 +15,10 @@ read_fd(int fd, void *ptr, size_t nbytes, int *recvfd)
      * 
      * */
     union {
-        struct cmghdr cm;
+        struct cmsghdr cm;
         char control[CMSG_SPACE(sizeof(int))]; 
     }control_un;
-    struct cmghdr *cmptr;
+    struct cmsghdr *cmptr;
 
     msg.msg_control = control_un.control;
     msg.msg_controllen = sizeof(control_un.control);
@@ -44,9 +44,9 @@ read_fd(int fd, void *ptr, size_t nbytes, int *recvfd)
     if ( (cmptr = CMSG_FIRSTHDR(&msg)) != NULL &&
             cmptr->cmsg_len == CMSG_LEN(sizeof(int))) {
         if ( cmptr->cmsg_level != SOL_SOCKET)
-            err_quit("control level != SOL_SOCKET");
+            printf("control level != SOL_SOCKET");
         if ( cmptr->cmsg_type!= SCM_RIGHTS)
-            err_quit("control type!= SCM_RIGHTS");
+            printf("control type!= SCM_RIGHTS");
         *recvfd = *((int *)CMSG_DATA(cmptr));
     } else {
         *recvfd = -1; 

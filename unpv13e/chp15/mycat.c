@@ -9,15 +9,14 @@ main(int argc, char **argv)
     char buff[BUFFSIZE];
 
     if (argc != 2)
-        err_quit("usage mycat <pathname>");
+        printf("usage mycat <pathname>");
 
     if ( (fd = my_open(argv[1], O_RDONLY)) < 0) {
-        printf("my_open fd :%d \n", fd);
-        err_sys("cannot open %s", argv[1]); 
+        printf("cannot open %s", argv[1]); 
     }
 
-    while ( (n = Read(fd, buff, BUFFSIZE)) > 0)
-        Write(STDOUT_FILENO, buff, n);
+    while ( (n = read(fd, buff, BUFFSIZE)) > 0)
+        write(STDOUT_FILENO, buff, n);
 
     exit(0);
 }
