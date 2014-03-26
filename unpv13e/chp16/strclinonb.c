@@ -10,13 +10,13 @@ str_cli(FILE *fp, int sockfd)
     char *toiptr, *tooptr, *friptr, *froptr;
 
     val = Fcntl(sockfd, F_GETFL, 0);
-    Fcntl(sockfd, val | O_NONBLOCK);
+    Fcntl(sockfd, F_SETFL, val | O_NONBLOCK);
 
     val = Fcntl(STDIN_FILENO, F_GETFL, 0);
-    Fcntl(sockfd, val | O_NONBLOCK);
+    Fcntl(STDIN_FILENO, F_SETFL, val | O_NONBLOCK);
 
     val = Fcntl(STDOUT_FILENO, F_GETFL, 0);
-    Fcntl(sockfd, val | O_NONBLOCK);
+    Fcntl(STDOUT_FILENO, F_SETFL, val | O_NONBLOCK);
 
     toiptr = tooptr = to;
     friptr = froptr = fr;
@@ -49,7 +49,7 @@ str_cli(FILE *fp, int sockfd)
                 if( tooptr == toiptr)
                     Shutdown(sockfd, SHUT_WR); 
             } else {
-                fprintf(stderr, "%s: read %d bytes from stdin\n", gf_time());   
+                fprintf(stderr, "%s: read %d bytes from stdin\n", gf_time(), n);   
                 toiptr += n;
                 FD_SET(sockfd, &wset);
             } 
@@ -66,7 +66,7 @@ str_cli(FILE *fp, int sockfd)
                 else
                     err_quit("str_cli: server terminated prematurely"); 
             } else {
-                fprintf(stderr, "%s: read %d bytes from scoket\n", gf_time());   
+                fprintf(stderr, "%s: read %d bytes from scoket\n", gf_time(), n);   
                 friptr += n;
                 FD_SET(STDOUT_FILENO, &wset); 
             } 
@@ -74,10 +74,10 @@ str_cli(FILE *fp, int sockfd)
 
         if ( FD_ISSET(STDOUT_FILENO, &wset) && ( (n = friptr - froptr) > 0) ) {
             if ( (nwritten = write(STDOUT_FILENO, froptr, n)) <0 ) {
-                if (errno != EWOLDBLOCK)
+                if (errno != EWOULDBLOCK)
                     err_sys("write error to stdout"); 
             } else {
-                fprintf(stder, "%s: wrote %d bytes to stdout.\n", gf_time(), nwritten);
+                fprintf(stderr, "%s: wrote %d bytes to stdout.\n", gf_time(), nwritten);
                 froptr += nwritten;
                 if (froptr == friptr)
                     froptr = friptr = fr;
@@ -86,10 +86,10 @@ str_cli(FILE *fp, int sockfd)
 
         if ( FD_ISSET(sockfd, &wset) && ( (n = toiptr - tooptr) > 0) ) {
             if ( (nwritten = write(sockfd, tooptr, n)) <0 ) {
-                if (errno != EWOLDBLOCK)
+                if (errno != EWOULDBLOCK)
                     err_sys("write error to socket"); 
             } else {
-                fprintf(stder, "%s: wrote %d bytes to socket.\n", gf_time(), nwritten);
+                fprintf(stderr, "%s: wrote %d bytes to socket.\n", gf_time(), nwritten);
                 tooptr += nwritten;
                 if (tooptr == toiptr) {
                     tooptr = toiptr = to;
