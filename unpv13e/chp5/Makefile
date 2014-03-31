@@ -15,7 +15,7 @@ tcpserv03:    tcpserv03.o sigchldwait.o
 tcpserv04:    tcpserv04.o sigchldwaitpid.o
 	${CC} ${CFLAGS} -o $@ tcpserv04.o sigchldwaitpid.o ${LIBS}
 tcpcli01:    tcpcli01.o 
-	${CC} ${CFLAGS} -o $@ tcpcli01.o  ${LIBS}
+	${CC} ${CFLAGS} -pg -o $@ tcpcli01.o  ${LIBS}
 tcpcli04:    tcpcli04.o 
 	${CC} ${CFLAGS} -o $@ tcpcli04.o  ${LIBS}
 clean:
