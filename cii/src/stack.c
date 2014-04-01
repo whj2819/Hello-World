@@ -3,6 +3,7 @@ static char rcsid[] = "$Id: H:/drh/idioms/book/RCS/inter.doc,v 1.11 1997/02/21 1
 #include "assert.h"
 #include "mem.h"
 #include "stack.h"
+
 #define T Stack_T
 struct T {
 	int count;
@@ -11,6 +12,7 @@ struct T {
 		struct elem *link;
 	} *head;
 };
+
 T Stack_new(void) {
 	T stk;
 	NEW(stk);
@@ -18,10 +20,12 @@ T Stack_new(void) {
 	stk->head = NULL;
 	return stk;
 }
+
 int Stack_empty(T stk) {
 	assert(stk);
 	return stk->count == 0;
 }
+
 void Stack_push(T stk, void *x) {
 	struct elem *t;
 	assert(stk);
@@ -31,6 +35,7 @@ void Stack_push(T stk, void *x) {
 	stk->head = t;
 	stk->count++;
 }
+
 void *Stack_pop(T stk) {
 	void *x;
 	struct elem *t;
@@ -43,6 +48,7 @@ void *Stack_pop(T stk) {
 	FREE(t);
 	return x;
 }
+
 void Stack_free(T *stk) {
 	struct elem *t, *u;
 	assert(stk && *stk);
@@ -52,3 +58,4 @@ void Stack_free(T *stk) {
 	}
 	FREE(*stk);
 }
+

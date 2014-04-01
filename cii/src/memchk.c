@@ -4,6 +4,7 @@ static char rcsid[] = "$Id: H:/drh/idioms/book/RCS/mem.doc,v 1.12 1997/10/27 23:
 #include "assert.h"
 #include "except.h"
 #include "mem.h"
+
 union align {
 #ifdef MAXALIGN
 	char pad[MAXALIGN];
@@ -18,11 +19,13 @@ union align {
 	long double ld;
 #endif
 };
+
 #define hash(p, t) (((unsigned long)(p)>>3) & \
 	(sizeof (t)/sizeof ((t)[0])-1))
 #define NDESCRIPTORS 512
 #define NALLOC ((4096 + sizeof (union align) - 1)/ \
 	(sizeof (union align)))*(sizeof (union align))
+
 const Except_T Mem_Failed = { "Allocation Failed" };
 static struct descriptor {
 	struct descriptor *free;
@@ -32,6 +35,7 @@ static struct descriptor {
 	const char *file;
 	int line;
 } *htab[2048];
+
 static struct descriptor freelist = { &freelist };
 static struct descriptor *find(const void *ptr) {
 	struct descriptor *bp = htab[hash(ptr, htab)];
@@ -39,6 +43,7 @@ static struct descriptor *find(const void *ptr) {
 		bp = bp->link;
 	return bp;
 }
+
 void Mem_free(void *ptr, const char *file, int line) {
 	if (ptr) {
 		struct descriptor *bp;
@@ -49,6 +54,7 @@ void Mem_free(void *ptr, const char *file, int line) {
 		freelist.free = bp;
 	}
 }
+
 void *Mem_resize(void *ptr, long nbytes,
 	const char *file, int line) {
 	struct descriptor *bp;
@@ -91,6 +97,7 @@ static struct descriptor *dalloc(void *ptr, long size,
 	nleft--;
 	return avail++;
 }
+
 void *Mem_alloc(long nbytes, const char *file, int line){
 	struct descriptor *bp;
 	void *ptr;
@@ -132,3 +139,4 @@ void *Mem_alloc(long nbytes, const char *file, int line){
 	assert(0);
 	return NULL;
 }
+
