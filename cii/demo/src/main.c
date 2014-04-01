@@ -2,14 +2,20 @@
 #include <stdlib.h>
 #include "assert.h"
 #include "except.h"
+#include "mem.h"
 
-
+struct demo{
+    int a;
+    int b;
+};
 
 int main(int argc, const char *argv[])
 {
-    int *p = NULL;
+    struct demo t;
 
-    assert(p != NULL);
+    ALLOC( sizeof(t) );
+
+
     
     return 0;
 }

@@ -1,12 +1,14 @@
 #ifndef MEM_INCLUDED
 #define MEM_INCLUDED
 
+#include "except.h"
 
 
-extern Excetp_T Mem_Failed;
+
+extern const Except_T Mem_Failed;
 extern void *Mem_alloc(long nbytes, const char *file, int line);
 
-extern void *Mem_calloc(long count long nbytes, \
+extern void *Mem_calloc(long count, long nbytes, \
         const char *file, int line);
 
 extern void Mem_free(void *ptr, const char *file, int line);

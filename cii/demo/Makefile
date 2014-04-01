@@ -7,7 +7,7 @@ CC = gcc
 
 all: $(PROGS)
 
-main: main.o assert.o except.o
+main: main.o assert.o except.o mem.o
 
 
 
