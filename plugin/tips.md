@@ -35,3 +35,20 @@ Original Text: Current file path is ~/test/
 
 after:
 Original Text: Current file path is  /home/ramesh/test/
+
+
+
+guu    一行文字全部变小写
+gUU    一行文字全部变大写
+g8     查看utf-8编码
+ga     查看ascii编码
+gf     打开光标处的文件.
+
+
+
+
+缩进:
+=% 锁进整个语句块,光标放在语句块的括号上.
+
+
+G=gg 或是 gg=G  - 缩进整个文件（G是到文件结尾，gg是到文件开头）

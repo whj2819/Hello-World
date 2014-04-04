@@ -1,22 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int
-main(void)
+
+
+struct {
+    int x;
+    struct {
+        int y, z;
+
+    }nested;
+
+}i = {.nested.y=5,6,.x=1,2};
+
+int main(int argc, const char *argv[])
 {
-    int *p = (int *)malloc(sizeof(int));
-    int *q = (int *)malloc(sizeof(int));
-    int i;
-
-
-    for (i = 0; i < 400; i++) {
-        p[i] = i;
-    }
-    q[0] = 0;
-
-    free(q);
-    free(p);
-
-
+    printf("y %d z: %d \n", i.nested.y, i.nested.z);
+    
     return 0;
 }
