@@ -4,20 +4,18 @@
 
 
 
-void func (void)
+int *func (void)
 {
-    int a = 10;
+    int i;
+    i = 10;
 
-    /* static int b = a; */
+    return &i;
 
 }
 
 int main(int argc, const char *argv[])
 {
-    /* func(); */
-
-    int a = 10;
-    static int b = a;
+    int b =  func();
     
     return 0;
 }
