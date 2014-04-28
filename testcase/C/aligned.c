@@ -11,14 +11,20 @@
 ( (MALLOC_ALIGNMENT - ((size_t)((A)) & CHUNK_ALIGN_MASK)) & CHUNK_ALIGN_MASK ))
 
 
+#define ALIGN8(A) \
+    ( (((size_t)(A) & (CHUNK_ALIGN_MASK)) == 0 ) ? (A): \
+        (align_offset(A) + (A) ))
+
 int main(int argc, const char *argv[])
 {
-    int *p = NULL;
+    char *p = NULL;
 
 
-    p = (int *)malloc(10);
-    p = (int *)0x0000008;
+    /* p = (int *)malloc(10); */
+    p = (char*)0x0000006;
 
+    p = ALIGN8(p);
     printf("%p is aligned ? [%d] offset %d\n", p, is_aligned(p), align_offset(p) );
     return 0;
 }
+
