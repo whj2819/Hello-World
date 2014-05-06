@@ -19,7 +19,7 @@ qsort1(int l, int u)
 
     if (l >= u)
         return;
-#if 1
+#if 0
     m = u + 1;
     for(i=u; i>=l; i--)
         if (x[i] >= x[l])

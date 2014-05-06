@@ -9,6 +9,6 @@ main: main.o
 	${CC} ${CFLAG} -o $@ main.c ${LIB}
 
 
-
+.PHONY:clean
 clean:
 	rm -f ${PROGS} ${CLEANFILES}
