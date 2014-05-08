@@ -1,16 +1,39 @@
 [user]
-    email = whj2819@gmail.com
-    name = whj2819
+	email = whj2819@gmail.com
+	name = whj2819
 [alias]
 	lg = log --pretty=graph --graph --abbrev-commit --
+    st=status
     ci=commit
     co=checkout
-    au=add -u
+    au=add -u :/
     aa=add -A
     br=branch
 [push]
     default = simple
 [core]
     editor = vi
+	autocrlf = input
 [pretty]
 	graph = %Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
+[color]
+    status=auto
+    branch=auto
+    diff=auto
+	ui = always
+[sendemail]
+	smtpserver = smtp.gmail.com
+	smtpserverport = 587
+	smtpencryption = tls
+	smtpuser = whj2819@gmail.com
+[color "diff"]
+	meta = blue black bold
+[merge]
+	tool = extMerge
+[mergetool "extMerge"]
+	cmd = extMerge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+	trustExitCode = false
+[diff]
+    external = extDiff
+[commit]
+	template = /home/whj2819/.gitmessage.txt
