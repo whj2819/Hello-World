@@ -1,19 +1,15 @@
-include <stdio.h>
+#include <stdio.h>
 
-union t {
-    char c;
-    int i;
+
+struct test {
+    int a;
+    int b;
+    char c[0];
 };
 
-int
-main(void)
+int main(int argc, const char *argv[])
 {
-    int i = 1;
-
-    if ( (*(char*)&i) == 1)
-        printf("%d \n", i);
-
-
+    printf("%d \n", sizeof(struct test));
+    
     return 0;
-
 }
