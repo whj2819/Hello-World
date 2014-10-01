@@ -4,7 +4,7 @@
 [alias]
 	lg = log --pretty=graph --graph --abbrev-commit --
     st=status
-    ci=commit
+    ci=commit -s
     co=checkout
     au=add -u :/
     aa=add -A
@@ -33,7 +33,8 @@
 [mergetool "extMerge"]
 	cmd = extMerge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
 	trustExitCode = false
-[diff]
-    external = extDiff
+
+#[diff]
+#    external = extDiff
 [commit]
 	template = /home/whj2819/.gitmessage.txt
