@@ -8,6 +8,7 @@
     au=add -u
     aa=add -A
     br=branch
+    st=status
 [push]
     default = simple
 [core]
